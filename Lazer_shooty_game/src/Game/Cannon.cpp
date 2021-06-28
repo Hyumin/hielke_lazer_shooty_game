@@ -88,11 +88,11 @@ void Cannon::Set_Objects(Object* _barrel, Object* _foot_hold)
 }
 void Cannon::Shoot()
 {
-	Vector2 adjusted_pos = m_pos;
-	adjusted_pos.x -= m_barrel->m_Pos.x;
-	adjusted_pos.y -= m_barrel->m_Pos.y;
+	Vector2 adjusted_pos = m_pos+m_barrel->m_Pos;
+	adjusted_pos.x += m_barrel->m_RenderInterface.point.x;
+	adjusted_pos.y += m_barrel->m_RenderInterface.point.y;
 
-	LazerProjectile* proj = new LazerProjectile(m_barrel_direction, m_barrel_direction, adjusted_pos);
+	LazerProjectile* proj = new LazerProjectile(m_barrel_direction, m_barrel_direction*10, adjusted_pos);
 	m_bullets.push_back(proj);
 }
 
@@ -103,7 +103,7 @@ void Cannon::draw(SDLRenderer* _renderer)
 	Vector2 _inverse_pos = m_pos * -1;
 	m_barrel->Render(_renderer, _inverse_pos,2);
 	m_foot_hold->Render(_renderer, _inverse_pos,1);
-
+	m_barrel->m_RenderInterface.angle = m_rotation* 57.32484076433121;
 	for (uint32_t i = 0; i < m_bullets.size(); ++i)
 	{
 		m_bullets[i]->Render(_renderer);
@@ -113,10 +113,14 @@ void Cannon::draw(SDLRenderer* _renderer)
 		//Directionline
 
 		Line l;
+		Vector2 adjusted_pos = m_pos + m_barrel->m_Pos;
+		adjusted_pos.x += m_barrel->m_RenderInterface.point.x;
+		adjusted_pos.y += m_barrel->m_RenderInterface.point.y;
 		l.colour = {0xff,0x00,0x00,0xff};
-		l.start = (m_barrel->m_Pos*-1);
-		l.end = (m_barrel->m_Pos*-1) + (m_barrel_direction * 100);
-		_renderer->AddLine(l, _inverse_pos,HDEFAULTEBUGLAYER);
+	
+		l.start = (adjusted_pos);
+		l.end = (adjusted_pos) + (m_barrel_direction * 1000);
+		_renderer->AddLine(l, { 0,0 }, HDEFAULTEBUGLAYER);
 	}
 
 }
@@ -146,6 +150,10 @@ void Cannon::Init(Vector2& _pos)
 	ResourceManager* man = ManagerSingleton::getInstance().res_man;
 	m_barrel->m_RenderInterface.texture = man->LoadTexture("Assets//SpriteSheets//player//lazer_barrel.png");
 	m_foot_hold->m_RenderInterface.texture = man->LoadTexture("Assets//SpriteSheets//player//laser_base.png");
+	SDL_Point p;
+	p.x = 64;
+	p.y = 94;
+	m_barrel->m_RenderInterface.point = p;
 	
 	//dereference resourcemanager 
 	man = nullptr;

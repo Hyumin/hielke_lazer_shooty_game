@@ -1,6 +1,4 @@
 ﻿  Cannon.cpp
 H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
-  Game.cpp
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
-  Generating Code...
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Cannon.cpp(106,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   lazer_shooty_game.vcxproj -> H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\\Bin\Debug\x64\lazer_shooty_game.exe

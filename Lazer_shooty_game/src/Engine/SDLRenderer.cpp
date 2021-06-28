@@ -158,7 +158,7 @@ void SDLRenderer::Render()
 				if (tex != nullptr)
 				{
 					//SDL_point is only used for SDL_rotate
-					SDL_RenderCopyEx(m_Renderer, tex->GetTexture(), &inter.srcRect, &inter.destRect, 0, 0, inter.renderFlip);
+					SDL_RenderCopyEx(m_Renderer, tex->GetTexture(), &inter.srcRect, &inter.destRect, inter.angle, &inter.point, inter.renderFlip);
 				}
 			}
 

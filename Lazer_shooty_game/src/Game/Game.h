@@ -56,7 +56,7 @@ private:
 
 
 	SDL_Keycode m_debug_mode_key = SDLK_1;
-	Object m_test_enemy;
+	Object m_test_enemy,m_test_enemy_2,m_test_enemy_3,m_test_enemy_4;
 
 };
 

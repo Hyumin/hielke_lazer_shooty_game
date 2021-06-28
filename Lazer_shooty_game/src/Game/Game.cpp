@@ -25,8 +25,14 @@ Game::~Game()
 void Game::Init()
 {
 	m_player_cannon = new Cannon(300, 400);
-	m_test_enemy = Object({ 800 , 100 }, {64,64});
+	m_test_enemy = Object({ 800 , 100 }, {32,32});
+	m_test_enemy_2 = Object({ 800 , 180 }, {64,64});
+	m_test_enemy_3 = Object({ 800 , 260 }, {64,64});
+	m_test_enemy_4 = Object({ 800 , 340 }, {64,64});
 	m_test_enemy.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//mad_eyeball_man.png");
+	m_test_enemy_2.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//ear_enemy.png");
+	m_test_enemy_3.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//mouth_enemy.png");
+	m_test_enemy_4.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//nose_enemy.png");
 	m_kup, m_kdwn, m_ksht = false;
 
 }
@@ -116,4 +122,7 @@ void Game::Render(SDLRenderer* _renderer)
 	m_WindowSize.y = (float)_renderer->GetWindowHeight();
 
 	m_test_enemy.Render(_renderer, { 0,0 });
+	m_test_enemy_2.Render(_renderer, { 0,0 });
+	m_test_enemy_3.Render(_renderer, { 0,0 });
+	m_test_enemy_4.Render(_renderer, { 0,0 });
 }

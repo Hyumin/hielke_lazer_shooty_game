@@ -7,6 +7,7 @@ Object::Object()
 	m_RenderInterface.srcRect = { 0,0,64,64 };
 	m_RenderInterface.texture = NULL;
 	m_RenderInterface.renderFlip = SDL_RendererFlip::SDL_FLIP_NONE;
+	m_RenderInterface.angle = 0;
 }
 
 Object::Object(Vector2 _pos, Vector2 _size)
@@ -16,6 +17,7 @@ Object::Object(Vector2 _pos, Vector2 _size)
 	m_RenderInterface.srcRect = {0,0,64,64};
 	m_RenderInterface.texture = NULL;
 	m_RenderInterface.renderFlip = SDL_RendererFlip::SDL_FLIP_NONE;
+	m_RenderInterface.angle = 0;
 }
 
 
@@ -24,6 +26,7 @@ Object::Object(Vector2 _pos, Vector2 _size, RenderInterface _visual)
 	m_Pos = _pos;
 	m_Size = _size;
 	m_RenderInterface = _visual;
+	m_RenderInterface.angle = 0;
 }
 
 Object::Object(Vector2 _pos, Vector2 _size, SDL_Rect _srcRect, SDL_RendererFlip _flip,Texture* _tex)
@@ -33,6 +36,7 @@ Object::Object(Vector2 _pos, Vector2 _size, SDL_Rect _srcRect, SDL_RendererFlip 
 	m_RenderInterface.srcRect = _srcRect;
 	m_RenderInterface.texture = _tex;
 	m_RenderInterface.renderFlip = _flip;
+	m_RenderInterface.angle = 0;
 }
 
 Object::~Object()

@@ -17,6 +17,7 @@ struct RenderInterface
 	Texture* texture;
 	SDL_RendererFlip renderFlip;
 	SDL_Point point;
+	float angle;
 };
 struct TextRenderInterface
 {
@@ -93,7 +94,7 @@ private:
 
 	unsigned int m_WindowWidth = 1280;
 	unsigned int m_WindowHeight = 720;
-	std::string m_WindowName = "Seiken 3";
+	std::string m_WindowName = "Hielke's cool name";
 
 	SDL_Texture* m_FPSTexture;
 	std::string m_FPSinstring = "FPS";
