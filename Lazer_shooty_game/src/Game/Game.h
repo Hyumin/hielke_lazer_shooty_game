@@ -43,7 +43,7 @@ private:
 	Hielke::Map* m_CurrentMap;
 	std::vector<FloatingText> m_FloatingTexts;
 
-	bool m_kup, m_kdwn, m_klft, m_krght;
+	bool m_kup, m_kdwn, m_klft, m_krght,m_ksht;
 	Vector2 m_WorldPos;
 	Vector2 m_WindowSize;
 
@@ -53,8 +53,10 @@ private:
 
 	bool m_DebugMode = false;// set this to true if you want see things like colliders etc.
 
-	SDL_Keycode m_debug_mode_key = SDLK_1;
 
+
+	SDL_Keycode m_debug_mode_key = SDLK_1;
+	Object m_test_enemy;
 
 };
 

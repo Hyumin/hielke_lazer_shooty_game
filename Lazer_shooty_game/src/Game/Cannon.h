@@ -1,6 +1,9 @@
 #pragma once
 #include "..\Engine\Object.h"
 #include "..\HielkMath.h"
+
+
+class Projectile;
 class Cannon
 {
 	//Cannon
@@ -40,11 +43,9 @@ private:
 	Vector2 m_barrel_direction;
 
 	float m_bull_accel;
-	float m_bull_timer;
 
 	//Later create a projectile class for now just have 2 vectors
-	std::vector<FilledBox> m_bullets;
-	std::vector<Vector2> m_bullet_velocities;
+	std::vector<Projectile*> m_bullets;
 
 };
 

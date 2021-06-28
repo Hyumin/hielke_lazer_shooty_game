@@ -51,6 +51,8 @@
     <ClCompile Include="src\Engine\WindowOpener.cpp" />
     <ClCompile Include="src\Game\Cannon.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
+    <ClCompile Include="src\Game\LazerProjectile.cpp" />
+    <ClCompile Include="src\Game\projectile.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +89,8 @@
     <ClInclude Include="src\Engine\WindowOpener.h" />
     <ClInclude Include="src\Game\Cannon.h" />
     <ClInclude Include="src\Game\Game.h" />
+    <ClInclude Include="src\Game\LazerProjectile.h" />
+    <ClInclude Include="src\Game\projectile.h" />
     <ClInclude Include="src\HielkMath.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

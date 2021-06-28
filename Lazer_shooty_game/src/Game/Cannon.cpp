@@ -1,5 +1,8 @@
 #include "Cannon.h"
 #include "..\Engine\ManagerSingleton.h"
+#include "LazerProjectile.h"
+
+#include <iostream>
 
 Cannon::Cannon()
 {
@@ -24,27 +27,21 @@ Cannon::~Cannon()
 	m_barrel = NULL;
 	delete m_foot_hold;
 	m_foot_hold = NULL;
+
+	m_bullets.clear();
 }
 
 void Cannon::Update(float _dt)
 {
-
-	//Hardcoded cooldown for now
-	m_bull_timer += _dt;
-	if (m_bull_timer >= 0.3)
-	{
-		m_bull_timer -= 0.3;
-		//Shoot();
-	}
-
 	for (uint32_t i = 0; i < m_bullets.size(); ++i)
 	{
-		//Get the direction vector
-		Vector2 dir = m_bullet_velocities[i];
-		dir.Normalize();
-		m_bullet_velocities[i] += dir * m_bull_accel * _dt;
-		m_bullets[i].box.x += (int)ceilf(m_bullet_velocities[i].x);
-		m_bullets[i].box.y += (int)ceilf(m_bullet_velocities[i].y);
+		m_bullets[i]->Update(_dt);
+		Vector2 bul_pos = m_bullets[i]->GetPos();
+		if (Vector2::Distance(m_pos, bul_pos)>3000)
+		{
+			m_bullets.erase(m_bullets.begin() + i);
+			std::cout << "Erasing at " << i << "\n";
+		}
 	}
 }
 
@@ -91,17 +88,12 @@ void Cannon::Set_Objects(Object* _barrel, Object* _foot_hold)
 }
 void Cannon::Shoot()
 {
-	FilledBox b;
 	Vector2 adjusted_pos = m_pos;
 	adjusted_pos.x -= m_barrel->m_Pos.x;
 	adjusted_pos.y -= m_barrel->m_Pos.y;
-	b.box = { (int)adjusted_pos.x,(int)adjusted_pos.y,10,10 };
-	b.col = {0x00,0xff,0x00,0xff};
 
-	Vector2 vel = m_barrel_direction*m_bull_accel;
-	m_bullet_velocities.push_back(vel);
-	m_bullets.push_back(b);
-
+	LazerProjectile* proj = new LazerProjectile(m_barrel_direction, m_barrel_direction, adjusted_pos);
+	m_bullets.push_back(proj);
 }
 
 void Cannon::draw(SDLRenderer* _renderer)
@@ -114,7 +106,7 @@ void Cannon::draw(SDLRenderer* _renderer)
 
 	for (uint32_t i = 0; i < m_bullets.size(); ++i)
 	{
-		_renderer->DrawFilledBox(m_bullets[i].box.x, m_bullets[i].box.y, m_bullets[i].box.w, m_bullets[i].box.h, m_bullets[i].col);
+		m_bullets[i]->Render(_renderer);
 	}
 	if (m_debug_mode)
 	{
@@ -159,11 +151,9 @@ void Cannon::Init(Vector2& _pos)
 	man = nullptr;
 
 	//default values for rotation
-	m_rotation = 0.0f;
-	m_prev_rotation = 0.0f;
+	m_rotation, m_prev_rotation = 0.0f;
 	m_barrel_direction = { 1,0 };//cosine of 0 = 1 and sine of 0 = 0
 	m_bull_accel = 0.1f;
-	m_bull_timer = 0.0f;
 
 	m_debug_mode = false;
 
