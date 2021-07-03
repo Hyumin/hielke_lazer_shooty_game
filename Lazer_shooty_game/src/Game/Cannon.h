@@ -20,7 +20,7 @@ public:
 	void Set_Position(float _x, float _y);
 	const Vector2& Get_Position();
 
-	void Shoot();
+	Projectile* Shoot(); //returns a bullet if available if it can't shoot it will return a nullpointer
 
 	void Set_Objects(Object* _barrel, Object* _foot_hold);
 	void draw(SDLRenderer* _renderer);
@@ -42,10 +42,8 @@ private:
 	float m_prev_rotation;
 	Vector2 m_barrel_direction;
 
-	float m_bull_accel;
-
-	//Later create a projectile class for now just have 2 vectors
-	std::vector<Projectile*> m_bullets;
+	float m_cd;
+	float m_cd_timer;
 
 };
 

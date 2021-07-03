@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include <exception>
 
 //header file containing classes for all of our math operations and functions etc.
 
@@ -188,3 +189,14 @@ private:
 
 };
 
+static int random_range(int _min, int _max)
+{
+	if (_min > _max)
+	{
+		throw(std::exception("Can not execute this function if min is higher than the maximum :("));
+	}
+
+	int random_num = rand() % _max + _min;
+
+	return random_num;
+}

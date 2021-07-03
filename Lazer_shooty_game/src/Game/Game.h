@@ -8,6 +8,8 @@
 #include "..\Engine\Map.h"
 #include "..\Debug\PlayerDebugInfo.h"
 #include "Cannon.h"
+#include "AI\MadEye.h"
+#include "projectile.h"
 
 struct Vec2
 {
@@ -32,13 +34,12 @@ public:
 	void Render(SDLRenderer* _renderer);
 	
 private:
-
+	void SpawnBalls(int _num_balls);
 	void ToggleDebugMode();
 
 	ResourceManager* m_ResMan;
 	Cannon* m_player_cannon;
 	//Hielke::PlayerDebugInfo* m_DebugInfo;
-
 
 	Hielke::Map* m_CurrentMap;
 	std::vector<FloatingText> m_FloatingTexts;
@@ -56,7 +57,8 @@ private:
 
 
 	SDL_Keycode m_debug_mode_key = SDLK_1;
-	Object m_test_enemy,m_test_enemy_2,m_test_enemy_3,m_test_enemy_4;
+	std::vector<Enemy*> m_enemies;
+	std::vector<Projectile*> m_player_projectiles;
 
 };
 

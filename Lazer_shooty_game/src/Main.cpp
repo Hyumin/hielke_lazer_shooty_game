@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include <time.h>
 
 #include "Engine\ResourceManager.h"
 #include "Game\Game.h"
@@ -41,6 +42,7 @@ int main(int arg, char* args[])
 	float start = 0.0f;
 	float end = 0.0f;
 	float timer = 0.0f;
+	srand(time(NULL));
 
 	if (!init())
 	{

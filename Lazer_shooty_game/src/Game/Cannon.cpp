@@ -28,21 +28,11 @@ Cannon::~Cannon()
 	delete m_foot_hold;
 	m_foot_hold = NULL;
 
-	m_bullets.clear();
 }
 
 void Cannon::Update(float _dt)
 {
-	for (uint32_t i = 0; i < m_bullets.size(); ++i)
-	{
-		m_bullets[i]->Update(_dt);
-		Vector2 bul_pos = m_bullets[i]->GetPos();
-		if (Vector2::Distance(m_pos, bul_pos)>3000)
-		{
-			m_bullets.erase(m_bullets.begin() + i);
-			std::cout << "Erasing at " << i << "\n";
-		}
-	}
+	m_cd_timer += _dt;
 }
 
 
@@ -86,14 +76,19 @@ void Cannon::Set_Objects(Object* _barrel, Object* _foot_hold)
 
 
 }
-void Cannon::Shoot()
+Projectile* Cannon::Shoot()
 {
-	Vector2 adjusted_pos = m_pos+m_barrel->m_Pos;
-	adjusted_pos.x += m_barrel->m_RenderInterface.point.x;
-	adjusted_pos.y += m_barrel->m_RenderInterface.point.y;
+	if (m_cd_timer >= m_cd)
+	{
+		Vector2 adjusted_pos = m_pos + m_barrel->m_Pos;
+		adjusted_pos.x += m_barrel->m_RenderInterface.point.x;
+		adjusted_pos.y += m_barrel->m_RenderInterface.point.y;
 
-	LazerProjectile* proj = new LazerProjectile(m_barrel_direction, m_barrel_direction*10, adjusted_pos);
-	m_bullets.push_back(proj);
+		LazerProjectile* proj = new LazerProjectile(m_barrel_direction, m_barrel_direction * 1000, adjusted_pos);
+		return proj;
+		m_cd_timer = 0.0f;
+	}
+	return nullptr;
 }
 
 void Cannon::draw(SDLRenderer* _renderer)
@@ -104,10 +99,6 @@ void Cannon::draw(SDLRenderer* _renderer)
 	m_barrel->Render(_renderer, _inverse_pos,2);
 	m_foot_hold->Render(_renderer, _inverse_pos,1);
 	m_barrel->m_RenderInterface.angle = m_rotation* 57.32484076433121;
-	for (uint32_t i = 0; i < m_bullets.size(); ++i)
-	{
-		m_bullets[i]->Render(_renderer);
-	}
 	if (m_debug_mode)
 	{
 		//Directionline
@@ -150,6 +141,9 @@ void Cannon::Init(Vector2& _pos)
 	ResourceManager* man = ManagerSingleton::getInstance().res_man;
 	m_barrel->m_RenderInterface.texture = man->LoadTexture("Assets//SpriteSheets//player//lazer_barrel.png");
 	m_foot_hold->m_RenderInterface.texture = man->LoadTexture("Assets//SpriteSheets//player//laser_base.png");
+
+	//Hardcoded point of the barrel, this point differs per barrel, maybe think about 
+	// an external file to load in the barrel objec in the future
 	SDL_Point p;
 	p.x = 64;
 	p.y = 94;
@@ -159,10 +153,10 @@ void Cannon::Init(Vector2& _pos)
 	man = nullptr;
 
 	//default values for rotation
-	m_rotation, m_prev_rotation = 0.0f;
+	m_rotation, m_cd_timer, m_prev_rotation = 0.0f;
 	m_barrel_direction = { 1,0 };//cosine of 0 = 1 and sine of 0 = 0
-	m_bull_accel = 0.1f;
-
 	m_debug_mode = false;
+
+	m_cd = 0.005f;
 
 }

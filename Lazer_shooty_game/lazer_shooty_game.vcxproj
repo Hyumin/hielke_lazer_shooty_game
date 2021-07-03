@@ -49,6 +49,8 @@
     <ClCompile Include="src\Engine\TextFieldBuilder.cpp" />
     <ClCompile Include="src\Engine\Texture.cpp" />
     <ClCompile Include="src\Engine\WindowOpener.cpp" />
+    <ClCompile Include="src\Game\AI\Enemy.cpp" />
+    <ClCompile Include="src\Game\AI\MadEye.cpp" />
     <ClCompile Include="src\Game\Cannon.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Game\LazerProjectile.cpp" />
@@ -87,6 +89,8 @@
     <ClInclude Include="src\Engine\TextFieldBuilder.h" />
     <ClInclude Include="src\Engine\Texture.h" />
     <ClInclude Include="src\Engine\WindowOpener.h" />
+    <ClInclude Include="src\Game\AI\Enemy.h" />
+    <ClInclude Include="src\Game\AI\MadEye.h" />
     <ClInclude Include="src\Game\Cannon.h" />
     <ClInclude Include="src\Game\Game.h" />
     <ClInclude Include="src\Game\LazerProjectile.h" />

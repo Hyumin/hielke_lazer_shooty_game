@@ -20,20 +20,17 @@ Game::~Game()
 	m_ResMan = NULL;
 	delete m_player_cannon;
 	m_player_cannon = NULL;
+
+	m_enemies.clear();
+	m_player_projectiles.clear();
 }
 
 void Game::Init()
 {
 	m_player_cannon = new Cannon(300, 400);
-	m_test_enemy = Object({ 800 , 100 }, {32,32});
-	m_test_enemy_2 = Object({ 800 , 180 }, {64,64});
-	m_test_enemy_3 = Object({ 800 , 260 }, {64,64});
-	m_test_enemy_4 = Object({ 800 , 340 }, {64,64});
-	m_test_enemy.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//mad_eyeball_man.png");
-	m_test_enemy_2.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//ear_enemy.png");
-	m_test_enemy_3.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//mouth_enemy.png");
-	m_test_enemy_4.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//nose_enemy.png");
 	m_kup, m_kdwn, m_ksht = false;
+
+	SpawnBalls(1);
 
 }
 
@@ -57,8 +54,44 @@ void Game::Update(float _dt)
 	}
 	if (m_ksht)
 	{
-		m_player_cannon->Shoot();
+		Projectile* proj = m_player_cannon->Shoot();
+		if (proj != nullptr)
+		{
+			m_player_projectiles.push_back(proj);
+		}
 	}
+	for (unsigned i = 0; i < m_enemies.size(); ++i)
+	{
+		m_enemies[i]->Update(_dt);
+		//Check collision with the enemies
+		for (uint32_t j = 0; j < m_player_projectiles.size(); ++j)
+		{
+			if (Box::BoxCollision(m_player_projectiles[j]->m_box, m_enemies[i]->m_collider))
+			{
+				m_enemies[i]->TakeDamage(100.0f);
+				m_player_projectiles.erase(m_player_projectiles.begin() + j);
+			}
+		}
+		//If enemy is supposed to die delete em.
+		if (m_enemies[i]->GetDeathState())
+		{
+			m_enemies.erase(m_enemies.begin() + i);
+			SpawnBalls(2);
+		}
+	}
+	Vector2 player_pos = m_player_cannon->Get_Position();
+	for (uint32_t i = 0; i < m_player_projectiles.size(); ++i)
+	{
+		m_player_projectiles[i]->Update(_dt);
+		Vector2 bul_pos = m_player_projectiles[i]->GetPos();
+		//if(Box::BoxCollision(m_player_projectiles[i]->m_box,m_enemies[i].get))
+
+		if (Vector2::Distance(player_pos, bul_pos) > 3000)
+		{
+			m_player_projectiles.erase(m_player_projectiles.begin() + i);
+		}
+	}
+
 }
 
 void Game::KeyDown(unsigned int _key)
@@ -77,11 +110,30 @@ void Game::KeyDown(unsigned int _key)
 	}
 }
 
+void Game::SpawnBalls(int _num_balls)
+{
+	EnemyStats mad_eye_stats;
+	mad_eye_stats.acceleration = 0.05f;
+	mad_eye_stats.current_health = 1000;
+	mad_eye_stats.max_health = 1000;
+
+	for (int i = 0; i < _num_balls; ++i)
+	{
+		MadEye* henk = new MadEye(random_range(0,1200), random_range(0, 800), mad_eye_stats);
+		henk->SetTarget(m_player_cannon);
+		m_enemies.push_back(henk);
+	}
+}
+
 void Game::ToggleDebugMode()
 {
 	m_DebugMode = m_DebugMode ? false : true;
 
 	m_player_cannon->DebugMode(m_DebugMode);
+	for (unsigned int i = 0; i < m_enemies.size(); ++i)
+	{
+		m_enemies[i]->m_debug = m_DebugMode;
+	}
 	if (m_DebugMode)
 	{
 	}
@@ -121,8 +173,12 @@ void Game::Render(SDLRenderer* _renderer)
 	m_WindowSize.x = (float)_renderer->GetWindowWidth();
 	m_WindowSize.y = (float)_renderer->GetWindowHeight();
 
-	m_test_enemy.Render(_renderer, { 0,0 });
-	m_test_enemy_2.Render(_renderer, { 0,0 });
-	m_test_enemy_3.Render(_renderer, { 0,0 });
-	m_test_enemy_4.Render(_renderer, { 0,0 });
+	for (unsigned i = 0; i < m_enemies.size(); ++i)
+	{
+		m_enemies[i]->Render(_renderer);
+	}
+	for (unsigned i = 0; i < m_player_projectiles.size(); ++i)
+	{
+		m_player_projectiles[i]->Render(_renderer);
+	}
 }

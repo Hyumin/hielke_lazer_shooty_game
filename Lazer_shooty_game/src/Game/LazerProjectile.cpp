@@ -32,8 +32,9 @@ void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
 	m_position = _initial_pos;
 	m_velocity = _vel;
 	m_direction = _dir;
-	m_acceleration = 0.1f;
+	m_acceleration = 0.0f;
 
 	m_box.w = 10;
 	m_box.h = 10;
+
 }

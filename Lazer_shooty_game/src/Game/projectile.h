@@ -14,6 +14,7 @@ public :
 	void SetPos(Vector2 _new_pos) { m_position = _new_pos; }
 
 
+	Box m_box;
 protected:
 
 	virtual void Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos) =0;
@@ -22,7 +23,6 @@ protected:
 	Vector2 m_position;
 	float m_acceleration;
 	float m_dmg;
-	Box m_box;
 
 
 };
