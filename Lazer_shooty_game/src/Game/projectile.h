@@ -12,9 +12,15 @@ public :
 
 	Vector2 GetPos() { return m_position; }
 	void SetPos(Vector2 _new_pos) { m_position = _new_pos; }
+	virtual void Die()=0;
 
+	bool GetDelete() {
+		return m_can_delete;
+	}
 
 	Box m_box;
+
+	bool m_untargatable;
 protected:
 
 	virtual void Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos) =0;
@@ -23,6 +29,7 @@ protected:
 	Vector2 m_position;
 	float m_acceleration;
 	float m_dmg;
+	bool m_can_delete;
 
 
 };

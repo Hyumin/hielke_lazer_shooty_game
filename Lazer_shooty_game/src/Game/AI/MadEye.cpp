@@ -81,10 +81,12 @@ void MadEye::Init(Vector2 _pos, EnemyStats _stats)
 	m_vel = Vector2{ 0,0 };
 	m_stats = _stats;
 
-	Object _obj = Object{ m_pos, {64, 64} };
+	int random_x = random_range(10, 256);
+
+	Object _obj = Object{ m_pos, {(float)random_x,(float)random_x} };
 	m_collider.pos = m_pos;
-	m_collider.w = 64;
-	m_collider.h = 64;
+	m_collider.w = _obj.m_Size.x;
+	m_collider.h = _obj.m_Size.y;;
 	_obj.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//mad_eyeball_man.png");
 	m_object = _obj;
 	m_direction = Vector2(0, 0);

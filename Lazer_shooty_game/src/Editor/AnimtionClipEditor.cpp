@@ -287,14 +287,16 @@ void AnimationClipEditor::LoadDefaultAssets()
 	if (m_ResMan != nullptr)
 	{
 		m_ResMan->LoadDefaultMedia();
-		m_CurrentTexture =m_ResMan->LoadTexture("Assets//SpriteSheets//Duran//seikendensetsu3_duran_sheet.png");
+		m_CurrentTexture = nullptr;
 
 		m_EditorIconsTexture = m_ResMan->LoadTexture("Assets//editor//sprite editor icons.png");
 		
+		/*
 		m_SpriteSheet.m_RenderInterface.texture = m_CurrentTexture;
 		m_SpriteSheet.m_Size = Vector2{ (float)m_CurrentTexture->GetWidth(),(float)m_CurrentTexture->GetHeight() };
 		m_SpriteSheet.m_RenderInterface.srcRect.w = m_CurrentTexture->GetWidth();
 		m_SpriteSheet.m_RenderInterface.srcRect.h = m_CurrentTexture->GetHeight();
+		*/
 		
 		m_DefaultFont = m_ResMan->LoadFont("Assets//Fonts//LucidaBrightRegular.ttf",16);
 		//m_DefaultFont =m_ResMan->GetFont("Assets//Fonts//arial.ttf");

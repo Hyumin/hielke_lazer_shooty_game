@@ -4,6 +4,7 @@
 
 using namespace Hielke;
 
+
 Game::Game()
 {
 	m_ResMan = NULL;
@@ -66,10 +67,14 @@ void Game::Update(float _dt)
 		//Check collision with the enemies
 		for (uint32_t j = 0; j < m_player_projectiles.size(); ++j)
 		{
-			if (Box::BoxCollision(m_player_projectiles[j]->m_box, m_enemies[i]->m_collider))
+			/*Check here if untargetable as its less cost efficient compared to the collision check*/
+			if (!m_player_projectiles[j]->m_untargatable)
 			{
-				m_enemies[i]->TakeDamage(100.0f);
-				m_player_projectiles.erase(m_player_projectiles.begin() + j);
+				if (Box::BoxCollision(m_player_projectiles[j]->m_box, m_enemies[i]->m_collider))
+				{
+					m_enemies[i]->TakeDamage(0.0f);
+					m_player_projectiles[j]->Die();
+				}
 			}
 		}
 		//If enemy is supposed to die delete em.
@@ -86,10 +91,16 @@ void Game::Update(float _dt)
 		Vector2 bul_pos = m_player_projectiles[i]->GetPos();
 		//if(Box::BoxCollision(m_player_projectiles[i]->m_box,m_enemies[i].get))
 
-		if (Vector2::Distance(player_pos, bul_pos) > 3000)
+		if (m_player_projectiles[i]->GetDelete())
 		{
 			m_player_projectiles.erase(m_player_projectiles.begin() + i);
 		}
+		//Hard erase
+		else if (Vector2::Distance(player_pos, bul_pos) > 3000)
+		{
+			m_player_projectiles.erase(m_player_projectiles.begin() + i);
+		}
+		
 	}
 
 }
@@ -113,7 +124,7 @@ void Game::KeyDown(unsigned int _key)
 void Game::SpawnBalls(int _num_balls)
 {
 	EnemyStats mad_eye_stats;
-	mad_eye_stats.acceleration = 0.05f;
+	mad_eye_stats.acceleration = 0.00f;
 	mad_eye_stats.current_health = 1000;
 	mad_eye_stats.max_health = 1000;
 

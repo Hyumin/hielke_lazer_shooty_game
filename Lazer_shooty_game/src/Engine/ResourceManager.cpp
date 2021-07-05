@@ -36,8 +36,6 @@ void ResourceManager::SetEngine(SDLRenderer* _EnginePointer)
 void ResourceManager::LoadDefaultMedia()
 {
 
-	LoadTexture("Assets\\SpriteSheets\\Duran\\seikendensetsu3_duran_sheet.png");
-	LoadTexture("Assets\\SpriteSheets\\Duran\\seikendensetsu3_duran_sheet.png");
 	LoadTexture(DefaultTextureName);
 	LoadFont("Assets//Fonts//Jupiter.ttf",32);
 	LoadFont("Assets//Fonts//arial.ttf",32);

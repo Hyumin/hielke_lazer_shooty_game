@@ -1,4 +1,6 @@
 #include "LazerProjectile.h"
+#include "..\Engine\ManagerSingleton.h"
+
 
 LazerProjectile::LazerProjectile()
 {
@@ -12,19 +14,42 @@ LazerProjectile::LazerProjectile(Vector2 _dir, Vector2 _vel, Vector2 _initial_po
 
 LazerProjectile::~LazerProjectile()
 {
+	delete m_sprite;
+	delete m_anim_clip;
 }
 
 void LazerProjectile::Update(float _dt)
 {
 
-	m_velocity += m_direction * m_acceleration;
-	m_position += m_velocity*_dt;
+
+	if (m_untargatable)
+	{
+		m_anim_clip->Update(_dt);
+		if (m_anim_clip->m_IsFinished)
+		{
+			m_can_delete = true;
+		}
+	}
+	else
+	{
+		m_velocity += m_direction * m_acceleration;
+		m_position += m_velocity * _dt;
+		m_box.pos = m_position;
+	}
 }
 
 void LazerProjectile::Render(SDLRenderer* _renderer, Vector2 _world_pos)
 {
-	m_box.pos = m_position;
-	_renderer->DrawFilledBox(m_box, { 255,0,0,125 }, _world_pos, 2);
+	m_sprite->m_Pos = m_position;
+	m_sprite->m_RenderInterface.srcRect = m_anim_clip->GetRect();
+	m_sprite->Render(_renderer, _world_pos);
+}
+
+void LazerProjectile::Die()
+{
+	m_untargatable = true;
+	std::cout << "I am of die :( \n";
+	m_anim_clip->Play();
 }
 
 void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
@@ -34,7 +59,17 @@ void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
 	m_direction = _dir;
 	m_acceleration = 0.0f;
 
-	m_box.w = 10;
-	m_box.h = 10;
+	m_sprite = new Object(_initial_pos, Vector2{ 64,64 });
+	m_box.w = 64;
+	m_box.h = 64;
+	m_sprite->m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//player//lazer_projectile_Sheet.png");
+	m_sprite->m_RenderInterface.point.x = 16;
+	m_sprite->m_RenderInterface.point.y = 14;
+	m_direction.Normalize();
+	m_sprite->m_RenderInterface.angle =   m_direction.y* 57.32484076433121;//Assuming direction is normalized
 
+	m_anim_clip = new AnimationClip();
+	m_anim_clip->LoadClipFromFile("Assets//AnimationClips//lazer_projectile_hitanimation", ManagerSingleton::getInstance().res_man);
+
+	m_can_delete = false;
 }

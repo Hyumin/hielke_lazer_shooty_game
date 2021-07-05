@@ -1,5 +1,6 @@
 #include "projectile.h"
-
+#include "..\Engine\AnimationClip.h"
+#include "..\Engine\Object.h"
 
 class LazerProjectile: public Projectile
 {
@@ -11,7 +12,11 @@ public :
 
 	virtual void Update(float _dt) ;
 	virtual void Render(SDLRenderer* _renderer, Vector2 _world_pos = { 0,0 });
+	virtual void Die();
 
 protected:
 	virtual void Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos);
+	Object *m_sprite;
+	AnimationClip *m_anim_clip;
+
 };
