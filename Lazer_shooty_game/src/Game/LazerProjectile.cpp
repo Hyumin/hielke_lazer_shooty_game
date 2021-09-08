@@ -42,7 +42,7 @@ void LazerProjectile::Render(SDLRenderer* _renderer, Vector2 _world_pos)
 {
 	m_sprite->m_Pos = m_position;
 	m_sprite->m_RenderInterface.srcRect = m_anim_clip->GetRect();
-	m_sprite->Render(_renderer, _world_pos);
+	m_sprite->Render(_renderer, _world_pos,3);
 }
 
 void LazerProjectile::Die()
@@ -50,6 +50,14 @@ void LazerProjectile::Die()
 	m_untargatable = true;
 	std::cout << "I am of die :( \n";
 	m_anim_clip->Play();
+}
+
+void LazerProjectile::SetAngle(float _angle)
+{
+	if (m_sprite != nullptr)
+	{
+		m_sprite->m_RenderInterface.angle = _angle * 57.32484076433121;
+	}
 }
 
 void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
@@ -66,7 +74,7 @@ void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
 	m_sprite->m_RenderInterface.point.x = 16;
 	m_sprite->m_RenderInterface.point.y = 14;
 	m_direction.Normalize();
-	m_sprite->m_RenderInterface.angle =   m_direction.y* 57.32484076433121;//Assuming direction is normalized
+	//m_sprite->m_RenderInterface.angle =   m_direction.y* 57.32484076433121;//Assuming direction is normalized
 
 	m_anim_clip = new AnimationClip();
 	m_anim_clip->LoadClipFromFile("Assets//AnimationClips//lazer_projectile_hitanimation", ManagerSingleton::getInstance().res_man);

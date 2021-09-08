@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <math.h>
 #include "..\Engine\ManagerSingleton.h"
+#include "..\Game\AI\EnemySpawner.h"
 
 using namespace Hielke;
 
@@ -18,6 +19,8 @@ Game::Game(ResourceManager* _resMan)
 
 Game::~Game()
 {
+	delete m_enemy_spawner;
+	m_enemy_spawner = NULL;
 	m_ResMan = NULL;
 	delete m_player_cannon;
 	m_player_cannon = NULL;
@@ -30,8 +33,10 @@ void Game::Init()
 {
 	m_player_cannon = new Cannon(300, 400);
 	m_kup, m_kdwn, m_ksht = false;
+	m_enemy_spawner = new EnemySpawner();
+	m_enemy_spawner->Initialize(this, m_ResMan);
 
-	SpawnBalls(1);
+	//SpawnBalls(1);
 
 }
 
@@ -45,6 +50,7 @@ void Game::SetResourceManager(ResourceManager* _resMan)
 void Game::Update(float _dt)
 {
 	m_player_cannon->Update(_dt);
+	m_enemy_spawner->Update(_dt);
 	if (m_kup)
 	{
 		m_player_cannon->Rotate(-5*_dt);
@@ -72,7 +78,7 @@ void Game::Update(float _dt)
 			{
 				if (Box::BoxCollision(m_player_projectiles[j]->m_box, m_enemies[i]->m_collider))
 				{
-					m_enemies[i]->TakeDamage(0.0f);
+					m_enemies[i]->TakeDamage(0.01f);
 					m_player_projectiles[j]->Die();
 				}
 			}
@@ -125,8 +131,8 @@ void Game::SpawnBalls(int _num_balls)
 {
 	EnemyStats mad_eye_stats;
 	mad_eye_stats.acceleration = 0.00f;
-	mad_eye_stats.current_health = 1000;
-	mad_eye_stats.max_health = 1000;
+	mad_eye_stats.current_health = 200;
+	mad_eye_stats.max_health = 200;
 
 	for (int i = 0; i < _num_balls; ++i)
 	{
@@ -144,12 +150,6 @@ void Game::ToggleDebugMode()
 	for (unsigned int i = 0; i < m_enemies.size(); ++i)
 	{
 		m_enemies[i]->m_debug = m_DebugMode;
-	}
-	if (m_DebugMode)
-	{
-	}
-	else
-	{
 	}
 
 }
@@ -192,4 +192,10 @@ void Game::Render(SDLRenderer* _renderer)
 	{
 		m_player_projectiles[i]->Render(_renderer);
 	}
+}
+
+void Game::AddEnemey(Enemy* _enem)
+{
+	_enem->m_debug = m_DebugMode;
+	m_enemies.push_back(_enem);
 }

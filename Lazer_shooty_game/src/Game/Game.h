@@ -8,7 +8,6 @@
 #include "..\Engine\Map.h"
 #include "..\Debug\PlayerDebugInfo.h"
 #include "Cannon.h"
-#include "AI\MadEye.h"
 #include "projectile.h"
 
 struct Vec2
@@ -16,6 +15,7 @@ struct Vec2
 	float x, y;
 };
 
+class EnemySpawner;
 class Game
 {
 
@@ -32,6 +32,7 @@ public:
 	void KeyDown(unsigned int _key);
 	void KeyUp(unsigned int _key);
 	void Render(SDLRenderer* _renderer);
+	void AddEnemey(Enemy* _enem);//Adds an enemy to the enemy array
 	
 private:
 	void SpawnBalls(int _num_balls);
@@ -54,11 +55,10 @@ private:
 
 	bool m_DebugMode = false;// set this to true if you want see things like colliders etc.
 
-
-
 	SDL_Keycode m_debug_mode_key = SDLK_1;
 	std::vector<Enemy*> m_enemies;
 	std::vector<Projectile*> m_player_projectiles;
+	EnemySpawner* m_enemy_spawner;
 
 };
 

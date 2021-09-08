@@ -50,6 +50,8 @@
     <ClCompile Include="src\Engine\Texture.cpp" />
     <ClCompile Include="src\Engine\WindowOpener.cpp" />
     <ClCompile Include="src\Game\AI\Enemy.cpp" />
+    <ClCompile Include="src\Game\AI\EnemyPath.cpp" />
+    <ClCompile Include="src\Game\AI\EnemySpawner.cpp" />
     <ClCompile Include="src\Game\AI\MadEye.cpp" />
     <ClCompile Include="src\Game\Cannon.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
@@ -90,6 +92,8 @@
     <ClInclude Include="src\Engine\Texture.h" />
     <ClInclude Include="src\Engine\WindowOpener.h" />
     <ClInclude Include="src\Game\AI\Enemy.h" />
+    <ClInclude Include="src\Game\AI\EnemyPath.h" />
+    <ClInclude Include="src\Game\AI\EnemySpawner.h" />
     <ClInclude Include="src\Game\AI\MadEye.h" />
     <ClInclude Include="src\Game\Cannon.h" />
     <ClInclude Include="src\Game\Game.h" />
@@ -156,7 +160,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(ProjectDir)..\Dep\SDL2-2.0.12\lib\x64\;$(ProjectDir)\..\Dep\SDL2_ttf-2.0.15\lib\x64\;$(ProjectDir)\..\Dep\SDL2_mixer-2.0.4\lib\x64\;$(ProjectDir)\..\Dep\SDL2_image-2.0.5\lib;$(ProjectDir)\..\Dep\SDL2_image-2.0.5\lib\x64\;$(ProjectDir)\..\Dep\nativefiledialog\lib\Debug\x64;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(ProjectDir)\..\Dep\nativefiledialog\include;$(ProjectDir)\..\Dep\SDL2_ttf-2.0.15\include;$(ProjectDir)\..\Dep\SDL2_mixer-2.0.4\include;$(ProjectDir)\..\Dep\SDL2_image-2.0.5\include;$(ProjectDir)..\Dep\SDL2-2.0.12\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\src\;$(ProjectDir)\..\Dep\nativefiledialog\include;$(ProjectDir)\..\Dep\SDL2_ttf-2.0.15\include;$(ProjectDir)\..\Dep\SDL2_mixer-2.0.4\include;$(ProjectDir)\..\Dep\SDL2_image-2.0.5\include;$(ProjectDir)..\Dep\SDL2-2.0.12\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\Bin\Debug\x64\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -2,7 +2,7 @@
 #include "..\..\Engine\SDLRenderer.h"
 #include "..\..\Engine\Object.h"
 #include "..\Cannon.h"
-
+#include "EnemyPath.h"
 
 struct EnemyStats
 {
@@ -33,15 +33,17 @@ public:
 
 	void SetTarget(Cannon* _cannon)
 	{
-		m_target = _cannon;
+		m_target_pos = _cannon->Get_Position();
 	}
 
 	Box m_collider;
+	EnemyPath m_enemy_path;
+
 protected:
 
 	virtual void Die()=0;
-	Cannon* m_target = nullptr;
 	bool m_dead;
+	Vector2 m_target_pos;
 	Object m_object;
 	EnemyStats m_stats;
 	Vector2 m_pos;

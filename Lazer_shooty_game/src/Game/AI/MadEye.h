@@ -11,7 +11,9 @@ public:
 	virtual void Update(float _dt);
 	virtual void Render(SDLRenderer* _renderer);
 	virtual void TakeDamage(float _dam);
+	void SetSize(float  _x, float _y);
 
+	bool m_follow_path;
 protected:
 
 	virtual void Die();

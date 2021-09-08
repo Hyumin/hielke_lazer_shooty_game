@@ -81,11 +81,12 @@ Projectile* Cannon::Shoot()
 	if (m_cd_timer >= m_cd)
 	{
 		Vector2 adjusted_pos = m_pos + m_barrel->m_Pos;
-		adjusted_pos.x += m_barrel->m_RenderInterface.point.x;
-		adjusted_pos.y += m_barrel->m_RenderInterface.point.y;
+		adjusted_pos.x += m_barrel->m_RenderInterface.point.x -32;
+		adjusted_pos.y += m_barrel->m_RenderInterface.point.y -32;
 
 		m_cd_timer = 0.00f;
 		LazerProjectile* proj = new LazerProjectile(m_barrel_direction, m_barrel_direction * 1000, adjusted_pos);
+		proj->SetAngle(m_rotation);
 		return proj;
 	}
 	return nullptr;
@@ -157,6 +158,6 @@ void Cannon::Init(Vector2& _pos)
 	m_barrel_direction = { 1,0 };//cosine of 0 = 1 and sine of 0 = 0
 	m_debug_mode = false;
 
-	m_cd = 1.0f;
+	m_cd = 0.1f;
 
 }

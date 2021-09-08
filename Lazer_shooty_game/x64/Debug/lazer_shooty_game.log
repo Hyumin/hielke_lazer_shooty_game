@@ -1,4 +1,3 @@
-﻿  LazerProjectile.cpp
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\LazerProjectile.cpp(69,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+﻿  EnemySpawner.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\EnemySpawner.cpp(95,29): warning C4018: '<': signed/unsigned mismatch
   lazer_shooty_game.vcxproj -> H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\\Bin\Debug\x64\lazer_shooty_game.exe

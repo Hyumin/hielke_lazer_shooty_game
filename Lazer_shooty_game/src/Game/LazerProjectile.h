@@ -13,7 +13,7 @@ public :
 	virtual void Update(float _dt) ;
 	virtual void Render(SDLRenderer* _renderer, Vector2 _world_pos = { 0,0 });
 	virtual void Die();
-
+	void SetAngle(float _angle);
 protected:
 	virtual void Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos);
 	Object *m_sprite;
