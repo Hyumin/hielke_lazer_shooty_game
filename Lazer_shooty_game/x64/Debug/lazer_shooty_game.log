@@ -1,3 +1,10 @@
 ﻿  EnemySpawner.cpp
 H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\EnemySpawner.cpp(95,29): warning C4018: '<': signed/unsigned mismatch
+  MadEye.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
+  Game.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Game.cpp(139,63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Game.cpp(139,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   lazer_shooty_game.vcxproj -> H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\\Bin\Debug\x64\lazer_shooty_game.exe

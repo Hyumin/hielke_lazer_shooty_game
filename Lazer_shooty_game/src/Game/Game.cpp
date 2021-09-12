@@ -87,7 +87,7 @@ void Game::Update(float _dt)
 		if (m_enemies[i]->GetDeathState())
 		{
 			m_enemies.erase(m_enemies.begin() + i);
-			SpawnBalls(2);
+			//SpawnBalls(2);
 		}
 	}
 	Vector2 player_pos = m_player_cannon->Get_Position();

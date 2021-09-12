@@ -30,17 +30,34 @@ void MadEye::Update(float _dt)
 	}
 
 	CalcDirection();
+	Vector2 speed_val = m_direction * m_stats.acceleration * _dt;
+	m_weird_speed += m_stats.acceleration * _dt;
+	m_vel = m_direction* m_weird_speed ;
+	//Apply a negative velocity if we're not going in the same direction as the target
+	if (m_follow_path)
+	{
+		//printf("bro (%f,%f) \n", bro.x,bro.y);
+		/*Vector2 bruh = m_vel;
+		bruh.x *= m_direction.x;
+		bruh.y *= m_direction.y;
+		bruh -= bro;
+		bruh.Normalize();
+		bro.Normalize();
+		float nega_vel = abs(bro.Dot(bro, m_direction));
+		if (nega_vel == 1)
+		{
+
+		}
+		else
+		{
+			
+			printf("DP : %f \n", nega_vel);
+			m_vel += bruh * m_stats.acceleration * _dt* (1-nega_vel);
+		}*/
+	}
+	
 
 	
-	Vector2 speed_val = m_direction * m_stats.acceleration * _dt;
-	m_vel += speed_val;
-	//Decrease velocity if magnitude is too high
-	//printf("magnitude = %f \n", m_vel.Magnitude());
-	if (m_vel.Magnitude() > 100)
-	{
-		printf("we're too fast \n");
-		m_vel -= speed_val;
-	}
 
 	m_pos += m_vel*_dt;
 	m_collider.pos = m_pos;
@@ -114,6 +131,9 @@ void MadEye::SetSize(float _x, float _y)
 {
 	m_object.m_Size.x = _x;
 	m_object.m_Size.y = _y;
+
+	m_collider.w = _x;
+	m_collider.h = _y;
 }
 
 void MadEye::Die()

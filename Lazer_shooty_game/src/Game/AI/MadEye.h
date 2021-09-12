@@ -22,5 +22,5 @@ protected:
 
 
 	Vector2 m_direction;
-
+	float m_weird_speed;
 };

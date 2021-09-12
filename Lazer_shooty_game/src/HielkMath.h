@@ -111,6 +111,12 @@ public:
 	void Normalize()
 	{
 		float mag = Magnitude();
+		if (mag == 0)
+		{
+			x = 0;
+			y = 0;
+			return;
+		}
 		x /= mag;
 		y /= mag;
 	}
