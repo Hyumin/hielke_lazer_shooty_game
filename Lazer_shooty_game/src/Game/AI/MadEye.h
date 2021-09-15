@@ -1,5 +1,5 @@
 #include "Enemy.h"
-
+#include "../../Engine/AnimationClip.h"
 
 class MadEye : public Enemy
 {
@@ -23,4 +23,5 @@ protected:
 
 	Vector2 m_direction;
 	float m_weird_speed;
+	AnimationClip m_walking_anim;
 };

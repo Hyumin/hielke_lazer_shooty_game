@@ -23,9 +23,9 @@ void EnemySpawner::Update(float _dt)
 {
 	m_spawn_timer += _dt;
 
-	if (m_spawn_timer >= 5.0f)
+	if (m_spawn_timer >= 1.0f)
 	{
-		m_spawn_timer -= 5.0f;
+		m_spawn_timer -= 1.0f;
 		if (m_game_ref != nullptr)
 		{
 			m_game_ref->AddEnemey(SpawnMadEye());
@@ -121,10 +121,10 @@ void EnemySpawner::CacheMadEye()
 	}
 	//Generates a generic madeye to be copied whenever the generator spawns an enemy
 	EnemyStats mad_eye_stats;
-	mad_eye_stats.acceleration = 50.0f;
+	mad_eye_stats.acceleration = 25.0f;
 	mad_eye_stats.current_health = 100;
 	mad_eye_stats.max_health = 100;
 	mad_eye_stats.damage = 5;
 	m_mad_eye_template = new MadEye({ 0,0 }, mad_eye_stats);
-	m_mad_eye_template->SetSize(45, 45);
+	m_mad_eye_template->SetSize(90, 90);
 }

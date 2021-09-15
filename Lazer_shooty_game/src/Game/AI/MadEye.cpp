@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <algorithm>
 #include <iomanip>
+#include <math.h>
+#include "../../Engine/AnimationClip.h"
 
 
 MadEye::MadEye(Vector2 _pos, EnemyStats _stats)
@@ -19,7 +21,7 @@ MadEye::MadEye(float _x, float _y, EnemyStats _stats)
 
 MadEye::~MadEye()
 {
-	
+
 }
 
 void MadEye::Update(float _dt)
@@ -28,11 +30,18 @@ void MadEye::Update(float _dt)
 	{
 		return;
 	}
-
+	m_walking_anim.Update(_dt);
 	CalcDirection();
 	Vector2 speed_val = m_direction * m_stats.acceleration * _dt;
 	m_weird_speed += m_stats.acceleration * _dt;
-	m_vel = m_direction* m_weird_speed ;
+
+	if (m_weird_speed >= 100)
+	{
+		m_weird_speed = 100;
+	}
+	m_vel = m_direction * m_weird_speed;
+
+	m_walking_anim.m_AnimInterval = (2- m_weird_speed/100.0f)*0.15f;
 	//Apply a negative velocity if we're not going in the same direction as the target
 	if (m_follow_path)
 	{
@@ -94,8 +103,9 @@ void MadEye::CalcDirection()
 
 void MadEye::Render(SDLRenderer* _renderer)
 {
-	m_object.m_Pos = m_pos;
-	
+	m_object.m_Pos = m_pos - m_object.m_Size/2;
+	m_object.m_RenderInterface.srcRect = m_walking_anim.GetRect();
+
 	m_object.Render(_renderer, { 0,0 });
 
 	if (m_debug)
@@ -132,8 +142,8 @@ void MadEye::SetSize(float _x, float _y)
 	m_object.m_Size.x = _x;
 	m_object.m_Size.y = _y;
 
-	m_collider.w = _x;
-	m_collider.h = _y;
+	m_collider.w = _x/2;
+	m_collider.h = _y/2;
 }
 
 void MadEye::Die()
@@ -154,8 +164,12 @@ void MadEye::Init(Vector2 _pos, EnemyStats _stats)
 	Object _obj = Object{ m_pos, {(float)random_x,(float)random_x} };
 	m_collider.pos = m_pos;
 	m_collider.w = _obj.m_Size.x;
-	m_collider.h = _obj.m_Size.y;;
-	_obj.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//mad_eyeball_man.png");
+	m_collider.h = _obj.m_Size.y;
+	_obj.m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//enemy//mad_Eye_sheet.png");
 	m_object = _obj;
 	m_direction = Vector2(0, 0);
+	m_walking_anim =  AnimationClip();
+
+	m_walking_anim.LoadClipFromFile("Assets//AnimationClips//enemies//mad_eye//mad_eye_walk.hanimclip", ManagerSingleton::getInstance().res_man);
+	m_walking_anim.Play();
 }

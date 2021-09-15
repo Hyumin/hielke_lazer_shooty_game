@@ -40,15 +40,19 @@ void LazerProjectile::Update(float _dt)
 
 void LazerProjectile::Render(SDLRenderer* _renderer, Vector2 _world_pos)
 {
-	m_sprite->m_Pos = m_position;
+	m_sprite->m_Pos = m_position - (m_sprite->m_Size/2);
 	m_sprite->m_RenderInterface.srcRect = m_anim_clip->GetRect();
 	m_sprite->Render(_renderer, _world_pos,3);
+
+	if (m_debug)
+	{
+		_renderer->DrawBox(m_box, { 0,255,0,255 }, { 0,0 }, HDEFAULTEBUGLAYER);
+	}
 }
 
 void LazerProjectile::Die()
 {
 	m_untargatable = true;
-	std::cout << "I am of die :( \n";
 	m_anim_clip->Play();
 }
 
@@ -71,8 +75,8 @@ void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
 	m_box.w = 64;
 	m_box.h = 64;
 	m_sprite->m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//player//lazer_projectile_Sheet.png");
-	m_sprite->m_RenderInterface.point.x = 16;
-	m_sprite->m_RenderInterface.point.y = 14;
+	m_sprite->m_RenderInterface.point.x = 32;
+	m_sprite->m_RenderInterface.point.y = 28;
 	m_direction.Normalize();
 	//m_sprite->m_RenderInterface.angle =   m_direction.y* 57.32484076433121;//Assuming direction is normalized
 
@@ -80,4 +84,5 @@ void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
 	m_anim_clip->LoadClipFromFile("Assets//AnimationClips//lazer_projectile_hitanimation", ManagerSingleton::getInstance().res_man);
 
 	m_can_delete = false;
+	m_debug = false;
 }

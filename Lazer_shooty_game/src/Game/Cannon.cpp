@@ -81,11 +81,15 @@ Projectile* Cannon::Shoot()
 	if (m_cd_timer >= m_cd)
 	{
 		Vector2 adjusted_pos = m_pos + m_barrel->m_Pos;
-		adjusted_pos.x += m_barrel->m_RenderInterface.point.x -32;
-		adjusted_pos.y += m_barrel->m_RenderInterface.point.y -32;
+		adjusted_pos.x += m_barrel->m_RenderInterface.point.x;
+		adjusted_pos.y += m_barrel->m_RenderInterface.point.y;
+		//Take width and height of the projectile /2 and multiply with direction asuming direction is a normalized direction vector
+		printf("Barreldirection(%f,%f) \n", m_barrel_direction.x, m_barrel_direction.y);
+
 
 		m_cd_timer = 0.00f;
 		LazerProjectile* proj = new LazerProjectile(m_barrel_direction, m_barrel_direction * 1000, adjusted_pos);
+		proj->m_debug = m_debug_mode;
 		proj->SetAngle(m_rotation);
 		return proj;
 	}
@@ -146,8 +150,8 @@ void Cannon::Init(Vector2& _pos)
 	//Hardcoded point of the barrel, this point differs per barrel, maybe think about 
 	// an external file to load in the barrel objec in the future
 	SDL_Point p;
-	p.x = 64;
-	p.y = 94;
+	p.x = 69;
+	p.y = 96;
 	m_barrel->m_RenderInterface.point = p;
 	
 	//dereference resourcemanager 

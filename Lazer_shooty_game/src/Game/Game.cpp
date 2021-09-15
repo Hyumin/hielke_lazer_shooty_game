@@ -78,7 +78,7 @@ void Game::Update(float _dt)
 			{
 				if (Box::BoxCollision(m_player_projectiles[j]->m_box, m_enemies[i]->m_collider))
 				{
-					m_enemies[i]->TakeDamage(0.01f);
+					m_enemies[i]->TakeDamage(10.0f);
 					m_player_projectiles[j]->Die();
 				}
 			}
@@ -86,6 +86,7 @@ void Game::Update(float _dt)
 		//If enemy is supposed to die delete em.
 		if (m_enemies[i]->GetDeathState())
 		{
+			printf("shoudld be deaht :O \n");
 			m_enemies.erase(m_enemies.begin() + i);
 			//SpawnBalls(2);
 		}

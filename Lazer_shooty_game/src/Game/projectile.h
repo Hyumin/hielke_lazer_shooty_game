@@ -13,6 +13,10 @@ public :
 	Vector2 GetPos() { return m_position; }
 	void SetPos(Vector2 _new_pos) { m_position = _new_pos; }
 	virtual void Die()=0;
+	void ToggleDebug() 
+	{
+		m_debug = m_debug ? false : true;
+	} 
 
 	bool GetDelete() {
 		return m_can_delete;
@@ -21,6 +25,7 @@ public :
 	Box m_box;
 
 	bool m_untargatable;
+	bool m_debug;
 protected:
 
 	virtual void Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos) =0;
