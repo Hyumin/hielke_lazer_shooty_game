@@ -27,15 +27,17 @@ Game::~Game()
 
 	m_enemies.clear();
 	m_player_projectiles.clear();
+	delete m_bg;
+	m_bg = NULL;
 }
 
 void Game::Init()
 {
-	m_player_cannon = new Cannon(300, 400);
+	m_player_cannon = new Cannon(300, 600);
 	m_kup, m_kdwn, m_ksht = false;
 	m_enemy_spawner = new EnemySpawner();
 	m_enemy_spawner->Initialize(this, m_ResMan);
-
+	m_bg = new SpaceBackground({ 10,12,45,255 }, { 1280 ,720 });
 	//SpawnBalls(1);
 
 }
@@ -51,6 +53,7 @@ void Game::Update(float _dt)
 {
 	m_player_cannon->Update(_dt);
 	m_enemy_spawner->Update(_dt);
+	m_bg->Update(_dt);
 	if (m_kup)
 	{
 		m_player_cannon->Rotate(-5*_dt);
@@ -193,6 +196,7 @@ void Game::Render(SDLRenderer* _renderer)
 	{
 		m_player_projectiles[i]->Render(_renderer);
 	}
+	m_bg->Render(_renderer);
 }
 
 void Game::AddEnemey(Enemy* _enem)

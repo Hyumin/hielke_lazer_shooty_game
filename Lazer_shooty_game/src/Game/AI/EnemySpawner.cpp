@@ -65,7 +65,7 @@ MadEye* EnemySpawner::SpawnMadEye()
 		// if so re-use an existing path
 		// Else generate a path
 		//Generate a path
-		EnemyPath path = GeneratePath(10, Vector2{ 1200,0 }, Vector2{ -500,0 });
+		EnemyPath path = GeneratePath(10, Vector2{ 1800,0 }, Vector2{ -500,0 });
 
 		path.ProgressPath();
 		enem->m_enemy_path = path;

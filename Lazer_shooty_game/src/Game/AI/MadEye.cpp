@@ -35,13 +35,13 @@ void MadEye::Update(float _dt)
 	Vector2 speed_val = m_direction * m_stats.acceleration * _dt;
 	m_weird_speed += m_stats.acceleration * _dt;
 
-	if (m_weird_speed >= 100)
+	if (m_weird_speed >= 300)
 	{
-		m_weird_speed = 100;
+		m_weird_speed = 300;
 	}
 	m_vel = m_direction * m_weird_speed;
 
-	m_walking_anim.m_AnimInterval = (2- m_weird_speed/100.0f)*0.15f;
+	m_walking_anim.m_AnimInterval = (2- m_weird_speed/300.0f)*0.15f;
 	//Apply a negative velocity if we're not going in the same direction as the target
 	if (m_follow_path)
 	{
@@ -69,7 +69,7 @@ void MadEye::Update(float _dt)
 	
 
 	m_pos += m_vel*_dt;
-	m_collider.pos = m_pos;
+	m_collider.pos = m_pos - m_object.m_Size / 4;
 	if (m_follow_path)
 	{
 		if (Vector2::Distance(m_pos, m_target_pos) < 50)

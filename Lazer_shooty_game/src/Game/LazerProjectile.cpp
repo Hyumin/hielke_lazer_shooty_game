@@ -74,9 +74,11 @@ void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
 	m_sprite = new Object(_initial_pos, Vector2{ 64,64 });
 	m_box.w = 64;
 	m_box.h = 64;
+
 	m_sprite->m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//player//lazer_projectile_Sheet.png");
 	m_sprite->m_RenderInterface.point.x = 32;
 	m_sprite->m_RenderInterface.point.y = 28;
+	
 	m_direction.Normalize();
 	//m_sprite->m_RenderInterface.angle =   m_direction.y* 57.32484076433121;//Assuming direction is normalized
 
@@ -85,4 +87,5 @@ void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
 
 	m_can_delete = false;
 	m_debug = false;
+
 }

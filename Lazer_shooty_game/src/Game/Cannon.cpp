@@ -107,7 +107,6 @@ void Cannon::draw(SDLRenderer* _renderer)
 	if (m_debug_mode)
 	{
 		//Directionline
-
 		Line l;
 		Vector2 adjusted_pos = m_pos + m_barrel->m_Pos;
 		adjusted_pos.x += m_barrel->m_RenderInterface.point.x;
@@ -140,7 +139,7 @@ void Cannon::Init(Vector2& _pos)
 	Set_Position(_pos);
 
 	//Create default barrel, and foot_hold object using the assets
-	m_barrel = new Object{ { -20,-60 }, {150, 150 }};
+	m_barrel = new Object{ { 0,-10 }, {120, 55 }};
 	m_foot_hold = new Object{ { 0,0 }, {100, 100} };
 
 	ResourceManager* man = ManagerSingleton::getInstance().res_man;
@@ -150,8 +149,8 @@ void Cannon::Init(Vector2& _pos)
 	//Hardcoded point of the barrel, this point differs per barrel, maybe think about 
 	// an external file to load in the barrel objec in the future
 	SDL_Point p;
-	p.x = 69;
-	p.y = 96;
+	p.x = 40;
+	p.y = 26;
 	m_barrel->m_RenderInterface.point = p;
 	
 	//dereference resourcemanager 

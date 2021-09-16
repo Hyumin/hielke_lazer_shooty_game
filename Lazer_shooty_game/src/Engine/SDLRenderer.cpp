@@ -259,6 +259,12 @@ void SDLRenderer::DrawFilledBox(Box _box, SDL_Color _color, Vector2 _worldPos, u
 	m_Layers[_layer].AddFilledBox(b);
 }
 
+void SDLRenderer::DrawFilledBox(FilledBox _fb, Vector2 _worldPos, unsigned int _layer)
+{
+	_fb.box = { (int)_fb.box.x - (int)_worldPos.x,(int)_fb.box.y - (int)_worldPos.y,(int)_fb.box.w,(int)_fb.box.h };
+	m_Layers[_layer].AddFilledBox(_fb);
+}
+
 void SDLRenderer::DrawBoxZoomed(Box _box, SDL_Color _color, Vector2 _worldPos, float _zoom, unsigned int _layer)
 {
 	WireFrameBox b;

@@ -9,6 +9,7 @@
 #include "..\Debug\PlayerDebugInfo.h"
 #include "Cannon.h"
 #include "projectile.h"
+#include "SpaceBackground .h"
 
 struct Vec2
 {
@@ -59,6 +60,8 @@ private:
 	std::vector<Enemy*> m_enemies;
 	std::vector<Projectile*> m_player_projectiles;
 	EnemySpawner* m_enemy_spawner;
+
+	SpaceBackground* m_bg;
 
 };
 

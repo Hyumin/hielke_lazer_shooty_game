@@ -206,3 +206,15 @@ static int random_range(int _min, int _max)
 
 	return random_num;
 }
+
+static float random_range(float _min, float _max)
+{
+	if (_min > _max)
+	{
+		throw(std::exception("Can not execute this function if min is higher than the maximum :("));
+	}
+
+	float random_num = _min + (float)(rand()) / ((float)RAND_MAX/_max);
+
+	return random_num;
+}
