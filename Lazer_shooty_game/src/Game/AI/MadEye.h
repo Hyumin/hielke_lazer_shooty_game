@@ -12,6 +12,7 @@ public:
 	virtual void Render(SDLRenderer* _renderer);
 	virtual void TakeDamage(float _dam);
 	void SetSize(float  _x, float _y);
+	void UpdateHealthBars();
 
 	bool m_follow_path;
 protected:
@@ -24,4 +25,6 @@ protected:
 	Vector2 m_direction;
 	float m_weird_speed;
 	AnimationClip m_walking_anim;
+	Box m_health_bar_line;
+	FilledBox m_health_bar;
 };

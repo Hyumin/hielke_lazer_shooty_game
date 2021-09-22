@@ -1,0 +1,11 @@
+Texture: H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\Assets\SpriteSheets\enemy\mad_Eye_sheet.png
+Clip_name:  
+anim_interval: 0.700000
+is_looping: 0
+Using_offset: 0
+SDL_rect: 0 32 32 32
+SDL_rect: 32 32 32 32
+SDL_rect: 64 32 32 32
+SDL_rect: 96 32 32 32
+SDL_rect: 128 32 32 32
+SDL_rect: 160 32 32 32

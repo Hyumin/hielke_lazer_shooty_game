@@ -104,9 +104,12 @@ void MadEye::CalcDirection()
 void MadEye::Render(SDLRenderer* _renderer)
 {
 	m_object.m_Pos = m_pos - m_object.m_Size/2;
+	UpdateHealthBars();
 	m_object.m_RenderInterface.srcRect = m_walking_anim.GetRect();
 
+	_renderer->DrawBox(m_health_bar_line, m_health_bar.col, { 0,0 });
 	m_object.Render(_renderer, { 0,0 });
+	_renderer->DrawFilledBox(m_health_bar, {0,0},1);
 
 	if (m_debug)
 	{
@@ -146,6 +149,21 @@ void MadEye::SetSize(float _x, float _y)
 	m_collider.h = _y/2;
 }
 
+void MadEye::UpdateHealthBars()
+{
+	//first define the sie of the healthbar box
+	m_health_bar.box.w = m_object.m_Size.x;
+	m_health_bar.box.h = m_object.m_Size.y / 10;
+	//Then set position accordingly
+	m_health_bar.box.x = m_object.m_Pos.x;
+	m_health_bar.box.y = m_object.m_Pos.y - m_health_bar.box.h; //Subtract the height of the object so the healthbar floats above
+
+	m_health_bar_line.pos = { (float)m_health_bar.box.x,(float)m_health_bar.box.y};
+	m_health_bar_line.w = m_health_bar.box.w;
+	m_health_bar_line.h = m_health_bar.box.h;
+	m_health_bar.box.w *= m_stats.current_health / m_stats.max_health;
+}
+
 void MadEye::Die()
 {
 	//Executes stuff to delete
@@ -172,4 +190,6 @@ void MadEye::Init(Vector2 _pos, EnemyStats _stats)
 
 	m_walking_anim.LoadClipFromFile("Assets//AnimationClips//enemies//mad_eye//mad_eye_walk.hanimclip", ManagerSingleton::getInstance().res_man);
 	m_walking_anim.Play();
+
+	m_health_bar.col = { 255,0,0,255 };
 }

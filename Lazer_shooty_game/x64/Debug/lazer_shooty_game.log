@@ -1,19 +1,4 @@
-﻿  EnemySpawner.cpp
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\EnemySpawner.cpp(95,29): warning C4018: '<': signed/unsigned mismatch
-  Game.cpp
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Game.cpp(143,63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Game.cpp(143,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  SpaceBackground .cpp
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\SpaceBackground .cpp(41,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\SpaceBackground .cpp(42,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\SpaceBackground .cpp(78,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\SpaceBackground .cpp(79,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\SpaceBackground .cpp(80,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\SpaceBackground .cpp(81,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  SpaceBackground.cpp
-  Main.cpp
+﻿  Main.cpp
 H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
 H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Main.cpp(45,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
   lazer_shooty_game.vcxproj -> H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\\Bin\Debug\x64\lazer_shooty_game.exe
