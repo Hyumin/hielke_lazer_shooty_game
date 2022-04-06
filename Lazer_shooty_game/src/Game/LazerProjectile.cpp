@@ -35,6 +35,7 @@ void LazerProjectile::Update(float _dt)
 		m_velocity += m_direction * m_acceleration;
 		m_position += m_velocity * _dt;
 		m_box.pos = m_position;
+		m_Circle.pos = m_position;
 	}
 }
 
@@ -46,7 +47,7 @@ void LazerProjectile::Render(SDLRenderer* _renderer, Vector2 _world_pos)
 
 	if (m_debug)
 	{
-		_renderer->DrawBox(m_box, { 0,255,0,255 }, { 0,0 }, HDEFAULTEBUGLAYER);
+		_renderer->DrawCircle(m_Circle, { 0,255,0,255 }, { 0,0 },1, HDEFAULTEBUGLAYER);
 	}
 }
 
@@ -74,6 +75,7 @@ void LazerProjectile::Init(Vector2 _dir, Vector2 _vel, Vector2 _initial_pos)
 	m_sprite = new Object(_initial_pos, Vector2{ 64,64 });
 	m_box.w = 64;
 	m_box.h = 64;
+	m_Circle.radius = 32;
 
 	m_sprite->m_RenderInterface.texture = ManagerSingleton::getInstance().res_man->LoadTexture("Assets//SpriteSheets//player//lazer_projectile_Sheet.png");
 	m_sprite->m_RenderInterface.point.x = 32;

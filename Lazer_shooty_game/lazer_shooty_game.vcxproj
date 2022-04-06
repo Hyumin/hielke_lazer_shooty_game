@@ -53,6 +53,7 @@
     <ClCompile Include="src\Game\AI\EnemyPath.cpp" />
     <ClCompile Include="src\Game\AI\EnemySpawner.cpp" />
     <ClCompile Include="src\Game\AI\MadEye.cpp" />
+    <ClCompile Include="src\Game\AI\MadEyeAnimController.cpp" />
     <ClCompile Include="src\Game\Cannon.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Game\LazerProjectile.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="src\Game\AI\EnemyPath.h" />
     <ClInclude Include="src\Game\AI\EnemySpawner.h" />
     <ClInclude Include="src\Game\AI\MadEye.h" />
+    <ClInclude Include="src\Game\AI\MadEyeAnimController.h" />
     <ClInclude Include="src\Game\Cannon.h" />
     <ClInclude Include="src\Game\Game.h" />
     <ClInclude Include="src\Game\LazerProjectile.h" />
@@ -115,26 +117,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -195,7 +197,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\Dep\nativefiledialog\include;$(ProjectDir)\..\Dep\SDL2_mixer-2.0.4\include;$(ProjectDir)\..\Dep\SDL2_ttf-2.0.15\include;$(ProjectDir)\..\Dep\SDL2_image-2.0.5\include;$(ProjectDir)\..\Dep\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\Engine;$(ProjectDir)\..\Dep\nativefiledialog\include;$(ProjectDir)\..\Dep\SDL2_mixer-2.0.4\include;$(ProjectDir)\..\Dep\SDL2_ttf-2.0.15\include;$(ProjectDir)\..\Dep\SDL2_image-2.0.5\include;$(ProjectDir)\..\Dep\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

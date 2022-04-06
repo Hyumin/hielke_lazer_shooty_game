@@ -32,6 +32,10 @@ public:
 	void Update(float _dt);
 	void KeyDown(unsigned int _key);
 	void KeyUp(unsigned int _key);
+	void MouseMove(int _x, int _y);
+	void MouseUp(int _key);
+	void MouseDown(int _key);
+
 	void Render(SDLRenderer* _renderer);
 	void AddEnemey(Enemy* _enem);//Adds an enemy to the enemy array
 	
@@ -49,6 +53,7 @@ private:
 	bool m_kup, m_kdwn, m_klft, m_krght,m_ksht;
 	Vector2 m_WorldPos;
 	Vector2 m_WindowSize;
+	Vector2 m_MousePos;
 
 	float m_Speed = 100.0f;
 	float m_AnimTimer = 0.0f;

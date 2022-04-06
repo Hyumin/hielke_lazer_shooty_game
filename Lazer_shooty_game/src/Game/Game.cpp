@@ -33,12 +33,12 @@ Game::~Game()
 
 void Game::Init()
 {
-	m_player_cannon = new Cannon(300, 600);
+	m_player_cannon = new Cannon(100, 980);
 	m_kup, m_kdwn, m_ksht = false;
 	m_enemy_spawner = new EnemySpawner();
 	m_enemy_spawner->Initialize(this, m_ResMan);
-	m_bg = new SpaceBackground({ 10,12,45,255 }, { 1280 ,720 });
-	//SpawnBalls(1);
+	m_bg = new SpaceBackground({ 10,12,45,255 }, { 1920 ,1080 });
+	//SpawnBalls(10);
 
 }
 
@@ -79,9 +79,9 @@ void Game::Update(float _dt)
 			/*Check here if untargetable as its less cost efficient compared to the collision check*/
 			if (!m_player_projectiles[j]->m_untargatable)
 			{
-				if (Box::BoxCollision(m_player_projectiles[j]->m_box, m_enemies[i]->m_collider))
+				if(CircleToCircleCollision(m_player_projectiles[j]->m_Circle,m_enemies[i]->m_circle))
 				{
-					m_enemies[i]->TakeDamage(10.0f);
+					m_enemies[i]->TakeDamage(100.0f);
 					m_player_projectiles[j]->Die();
 				}
 			}
@@ -135,12 +135,12 @@ void Game::SpawnBalls(int _num_balls)
 {
 	EnemyStats mad_eye_stats;
 	mad_eye_stats.acceleration = 0.00f;
-	mad_eye_stats.current_health = 200;
-	mad_eye_stats.max_health = 200;
+	mad_eye_stats.current_health = 200000000;
+	mad_eye_stats.max_health = 200000000;
 
 	for (int i = 0; i < _num_balls; ++i)
 	{
-		MadEye* henk = new MadEye(random_range(0,1200), random_range(0, 800), mad_eye_stats);
+		MadEye* henk = new MadEye(random_range(0,1920), random_range(0, 800), mad_eye_stats);
 		henk->SetTarget(m_player_cannon);
 		m_enemies.push_back(henk);
 	}
@@ -178,6 +178,26 @@ void Game::KeyUp(unsigned int _key)
 	{
 		m_ksht = false;
 	}
+	if (_key == SDLK_2)
+	{
+		m_player_cannon->ToggleMouseMode();
+	}
+}
+
+void Game::MouseMove(int _x, int _y)
+{
+
+	m_MousePos.x = (float)_x;
+	m_MousePos.y = (float)_y;
+	m_player_cannon->MouseMove(m_MousePos);
+}
+
+void Game::MouseUp(int _key)
+{
+}
+
+void Game::MouseDown(int _key)
+{
 }
 
 void Game::Render(SDLRenderer* _renderer)

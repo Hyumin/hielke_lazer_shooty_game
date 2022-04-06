@@ -23,9 +23,9 @@ void EnemySpawner::Update(float _dt)
 {
 	m_spawn_timer += _dt;
 
-	if (m_spawn_timer >= 1.0f)
+	if (m_spawn_timer >= 2.0f)
 	{
-		m_spawn_timer -= 1.0f;
+		m_spawn_timer -= 2.0f;
 		if (m_game_ref != nullptr)
 		{
 			m_game_ref->AddEnemey(SpawnMadEye());
@@ -59,13 +59,16 @@ MadEye* EnemySpawner::SpawnMadEye()
 		MadEye* enem = new MadEye(0, 0, {});
 		memcpy(enem , m_mad_eye_template, sizeof(MadEye));
 
+		//Generate new animcontroller
+		enem->InitController();
+
 		//TODO ADD WAVE GENERATION OR SMETHING?
 		// Check if we're in a wave of enemies
 	
 		// if so re-use an existing path
 		// Else generate a path
 		//Generate a path
-		EnemyPath path = GeneratePath(10, Vector2{ 1800,0 }, Vector2{ -500,0 });
+		EnemyPath path = GeneratePath(10, Vector2{ 2500,0 }, Vector2{ -500,0 });
 
 		path.ProgressPath();
 		enem->m_enemy_path = path;
@@ -97,7 +100,7 @@ EnemyPath EnemySpawner::GeneratePath(int _segments, Vector2 _start_pos, Vector2 
 		//Generate a random point along the X axis
 		Vector2 new_path = Vector2{ next_x_pos,0 };
 		//somehow get the screenheight here and then randomize the point like that
-		new_path.y = (float)random_range(0, 720 );
+		new_path.y = (float)random_range(0, 1080 );
 		_path.AddPoint(new_path);
 		next_x_pos -= x_to_add;
 	}

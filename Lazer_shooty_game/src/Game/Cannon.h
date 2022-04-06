@@ -19,6 +19,8 @@ public:
 	void Set_Position(Vector2& _pos);
 	void Set_Position(float _x, float _y);
 	const Vector2& Get_Position();
+	void MouseMove(Vector2 _mpos);//Gives the cannon the mouse position
+
 
 	Projectile* Shoot(); //returns a bullet if available if it can't shoot it will return a nullpointer
 
@@ -27,9 +29,11 @@ public:
 	void Rotate(float _by);//This adds the float value to the rotation value
 
 	void DebugMode(bool _new_val);
+	void ToggleMouseMode();
 
 private:
 
+	bool m_mouse_mode = false;
 	bool m_debug_mode;
 	//initialize function to make sure all constructors do the "same"
 	void Init(Vector2& _pos);

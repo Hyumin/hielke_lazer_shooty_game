@@ -13,11 +13,13 @@ AnimationClip::AnimationClip()
 	m_Looping = false;
 	m_ClipName = " ";
 	m_IsFinished = false;
+	m_UseEvents = false;
 	m_SourceTexture = NULL;
 }
 
 AnimationClip::~AnimationClip()
 {
+
 }
 
 void AnimationClip::Update(float _dt)
@@ -33,6 +35,7 @@ void AnimationClip::Update(float _dt)
 				//increment the index and check whether its bigger than the size of the array
 				m_AnimTimer -= m_AnimInterval;
 				m_CurrentIndex++;
+				TriggerEvent();
 				if (m_CurrentIndex > 100)
 				{
 					printf("nandayo \n");
@@ -57,7 +60,7 @@ SDL_Rect& AnimationClip::GetRect()
 {
 	if (m_SourceRects.size() == 0)
 	{
-		throw std::exception(("Animation clip with filename"+m_FileName+" has no clips | Animationlip.cpp \n").c_str());
+		throw std::exception(("Animation clip with filename "+m_FileName+" has no clips | Animationlip.cpp \n").c_str());
 	}
 
 	return m_SourceRects[m_CurrentIndex];
@@ -89,7 +92,7 @@ void AnimationClip::LoadClipFromFile(const std::string& _path, ResourceManager* 
 	std::string stuff = " ";
 	std::ifstream file(_path);
 	m_FileName = _path;
-
+	unsigned int curr_frame = 0;
 	while (!file.eof())
 	{
 
@@ -112,10 +115,21 @@ void AnimationClip::LoadClipFromFile(const std::string& _path, ResourceManager* 
 			file >> h;
 			SDL_Rect newRect = { x, y, w, h };
 			m_SourceRects.push_back(newRect);
+			curr_frame = m_SourceRects.size()-1;
 		}
 		if (stuff == "Using_offset:")
 		{
 			file >> m_UseOffsets;
+		}
+		if (stuff == "Using_Events:")
+		{
+			file >> m_UseEvents;
+		}
+		if (stuff == "Event:")
+		{
+			int stuff =0;
+			file >> stuff;
+			m_Events[stuff] = 1;
 		}
 		if (stuff == "Offset:")
 		{
@@ -170,6 +184,28 @@ void AnimationClip::Play()
 	m_IsFinished = false;
 }
 
+void AnimationClip::Stop()
+{
+	m_IsFinished = true;
+	m_IsPlaying = false;
+}
+
+void AnimationClip::Pause()
+{
+	m_IsPlaying = false;
+}
+
+void AnimationClip::Resume()
+{
+	m_IsPlaying = true;
+}
+
+void AnimationClip::Reset()
+{
+	m_CurrentIndex = 0;
+	m_IsFinished = 0;
+}
+
 void AnimationClip::NextFrame()
 {
 	if (m_CurrentIndex < m_SourceRects.size()-1)
@@ -181,6 +217,17 @@ void AnimationClip::NextFrame()
 		m_CurrentIndex = 0;
 	}
 }
+
+void AnimationClip::TriggerEvent()
+{
+	//if IntCallBack exists
+	if (m_UseEvents)
+	{
+		m_IntCallback(m_Events[m_CurrentIndex]);
+		printf("Trigger event \n");
+	}
+}
+
 void AnimationClip::PrevFrame()
 {
 	if (m_CurrentIndex > 0)
@@ -194,6 +241,11 @@ void AnimationClip::PrevFrame()
 			m_CurrentIndex = (unsigned int)m_SourceRects.size() - 1;
 		}
 	}
+}
+
+void AnimationClip::SetFunction(std::function<void(unsigned int)> _func)
+{
+	m_IntCallback = _func;
 }
 
 void AnimationClip::GenerateOffsetsArray()

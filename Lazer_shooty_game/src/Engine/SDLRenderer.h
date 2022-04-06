@@ -86,6 +86,9 @@ public:
 	void DrawBoxZoomed(int _x, int _y, int _w, int _h, SDL_Color _color = { 0xff,0xff,0xff,0xff }, Vector2 _worldPos = { 0.0f,0.0f }, float _zoom = 1.0f, unsigned int _layer = 0);
 	void DrawFilledBoxZoomed(int _x, int _y, int _w, int _h, SDL_Color _color = { 0xff,0xff,0xff,0xff }, Vector2 _worldPos = { 0.0f,0.0f }, float _zoom = 1.0f, unsigned int _layer = 0);
 	void DrawFilledBoxZoomed(Box _box, SDL_Color _color = { 0xff,0xff,0xff,0xff }, Vector2 _worldPos = { 0.0f,0.0f },float _zoom = 1.0f, unsigned int _layer = 0);
+
+	void DrawCircle(CircleCollider _circle, SDL_Color _color = { 0xff,0xff,0xff,0xff }, Vector2 _world_pos = { 0.0f,0.0f }, float _zoom = 1.0f, unsigned int _layer = 0);
+
 	RenderTarget* CreateRenderTarget(Box _box,unsigned int _layer);
 
 private:

@@ -312,6 +312,32 @@ void SDLRenderer::DrawFilledBoxZoomed(Box _box, SDL_Color _color, Vector2 _world
 	m_Layers[_layer].AddFilledBox(b);
 }
 
+//This is not optimized, if debug analyzing ever gets laggy due to circle being drawn
+// Consider caching this in a sdl_surface and draw that instead.
+void SDLRenderer::DrawCircle(CircleCollider _circle, SDL_Color _color, Vector2 _world_pos, float _zoom, unsigned int _layer)
+{
+	//Pi in pixels is 4 and twice that makes a circle so divide 8 by the num steps we want to use
+	unsigned int num_steps = 16;
+	float radians_per_step = 8 / (float)num_steps;
+	Vector2 target = { 0,0 };
+	Vector2 old = { 0,0 };
+	//Use a depth of 16 iteration to draw 
+	for (unsigned int i = 0; i < num_steps; ++i)
+	{
+		float curr_radians = i * radians_per_step;
+		old = target;
+		target.x = _circle.pos.x + (cosf(curr_radians) * _circle.radius);
+		target.y = _circle.pos.y + (sinf(curr_radians) * _circle.radius);
+		if (i > 0)
+		{
+			AddLineZoomed(old, target, _world_pos, _color, _zoom, _layer);
+		}
+
+	}
+
+
+}
+
 RenderTarget* SDLRenderer::CreateRenderTarget(Box _box,unsigned int _layer)
 {
 	RenderTarget* t = new RenderTarget(m_Renderer);

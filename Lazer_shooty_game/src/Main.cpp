@@ -14,8 +14,8 @@
 
 //Made using https://lazyfoo.net/tutorials/SDL/index.php
 
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 720;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
 const char* WINDOWNAME = "Hielke's cool windowname ";
 
@@ -31,7 +31,7 @@ Game* g_Game = NULL;
 Editor* g_Editor = NULL;
 
 
-bool EDITORMODE = true;
+bool EDITORMODE = false;
 
 
 int main(int arg, char* args[])
@@ -100,12 +100,20 @@ int main(int arg, char* args[])
 					{
 						g_Editor->MouseDown(e.button.button);
 					}
+					if (g_Game != nullptr)
+					{
+						g_Game->MouseDown(e.button.button);
+					}
 				}
 				else if (e.type == SDL_MOUSEBUTTONUP)
 				{
 					if (g_Editor != nullptr)
 					{
 						g_Editor->MouseUp(e.button.button);
+					}
+					if (g_Game != nullptr)
+					{
+						g_Game->MouseUp(e.button.button);
 					}
 				}
 				else if (e.type == SDL_MOUSEMOTION)
@@ -116,6 +124,10 @@ int main(int arg, char* args[])
 					if (g_Editor !=nullptr)
 					{
 						g_Editor->MouseMove(x, y);
+					}
+					if (g_Game != nullptr)
+					{
+						g_Game->MouseMove(x, y);
 					}
 				}
 				else if (e.type == SDL_MOUSEWHEEL)//https://wiki.libsdl.org/SDL_MouseWheelEvent

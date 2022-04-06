@@ -23,6 +23,7 @@ public :
 	}
 
 	Box m_box;
+	CircleCollider m_Circle;
 
 	bool m_untargatable;
 	bool m_debug;

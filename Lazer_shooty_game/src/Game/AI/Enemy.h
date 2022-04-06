@@ -37,6 +37,7 @@ public:
 	}
 
 	Box m_collider;
+	CircleCollider m_circle;
 	EnemyPath m_enemy_path;
 
 protected:

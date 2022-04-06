@@ -195,6 +195,59 @@ private:
 
 };
 
+class CircleCollider
+{
+public:
+	CircleCollider() {
+		pos = Vector2();
+		radius = 1.0f;
+	}
+	~CircleCollider() {
+		
+	}
+
+
+	Vector2 pos;
+	float radius;
+};
+
+//For collision with a point we will assume a radius of 0.1 for the "point"
+static bool CircleCollisionPoint(CircleCollider& _a ,Vector2 _b)
+{
+	return Vector2::Distance(_a.pos, _b) <= _a.radius + 0.1f; 
+}
+
+static bool CircleToCircleCollision(CircleCollider& _a, CircleCollider& _b)
+{
+	return Vector2::Distance(_a.pos, _b.pos) <= _a.radius + _b.radius;
+}
+
+static Vector2 ClosestPtPointAABB(Vector2 _p, Box _box)
+{
+	Vector2 return_val;
+
+
+	float v = _p.x;
+	if (v < _box.pos.x) v = _box.pos.x;
+	if (v > _box.pos.x + _box.w) v = _box.pos.x + _box.w;
+	return_val.x = v;
+
+	v = _p.y;
+	if (v < _box.pos.y) v = _box.pos.y;
+	if (v > _box.pos.y + _box.h) v = _box.pos.y + _box.h;
+	return_val.y = v;
+
+	return return_val;
+
+}
+
+static bool CircleToBoxCollision(CircleCollider& _a, Box& _b)
+{
+	Vector2 closest = ClosestPtPointAABB(_a.pos, _b);
+
+	return Vector2::Distance(_a.pos, closest) <= _a.radius;
+}
+
 static int random_range(int _min, int _max)
 {
 	if (_min > _max)

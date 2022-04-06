@@ -144,6 +144,9 @@
     <ClCompile Include="src\Game\SpaceBackground .cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\AI\MadEyeAnimController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\HielkMath.h">
@@ -267,6 +270,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Game\SpaceBackground .h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\AI\MadEyeAnimController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

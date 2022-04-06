@@ -54,6 +54,28 @@ const Vector2& Cannon::Get_Position()
 	return m_pos;
 }
 
+void Cannon::MouseMove(Vector2 _mpos)
+{
+	if (m_mouse_mode)
+	{
+		//Calculate the direction from the barrel to the mouse position and use this as dir
+		Vector2 target_vec = (_mpos - m_pos);
+		target_vec.Normalize();
+		m_barrel_direction = target_vec;
+
+		
+		float rot = acosf(target_vec.x);
+		printf("target_vec:(%f,%f) \n", target_vec.x, target_vec.y);
+		if (target_vec.y < 0)
+		{
+			rot *= -1;
+		}
+		m_rotation = rot;
+
+	}
+
+}
+
 //The idea is we create the objects somewhere externally and dispense them 
 //with this function, make sure to reference the created object to null above
 // this class will deal with deleteing these objects.
@@ -104,8 +126,8 @@ void Cannon::draw(SDLRenderer* _renderer)
 	m_barrel->Render(_renderer, _inverse_pos,2);
 	m_foot_hold->Render(_renderer, _inverse_pos,1);
 	m_barrel->m_RenderInterface.angle = m_rotation* 57.32484076433121;
-	if (m_debug_mode)
-	{
+	//if (m_debug_mode)
+	//{
 		//Directionline
 		Line l;
 		Vector2 adjusted_pos = m_pos + m_barrel->m_Pos;
@@ -114,9 +136,9 @@ void Cannon::draw(SDLRenderer* _renderer)
 		l.colour = {0xff,0x00,0x00,0xff};
 	
 		l.start = (adjusted_pos);
-		l.end = (adjusted_pos) + (m_barrel_direction * 1000);
+		l.end = (adjusted_pos) + (m_barrel_direction * 10000);
 		_renderer->AddLine(l, { 0,0 }, HDEFAULTEBUGLAYER);
-	}
+	//}
 
 }
 
@@ -132,6 +154,11 @@ void Cannon::Rotate(float _by)
 void Cannon::DebugMode(bool _new_val)
 {
 	m_debug_mode = _new_val;
+}
+
+void Cannon::ToggleMouseMode()
+{
+	m_mouse_mode = m_mouse_mode ? false : true;
 }
 
 void Cannon::Init(Vector2& _pos)

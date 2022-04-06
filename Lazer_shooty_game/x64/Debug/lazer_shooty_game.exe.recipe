@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <ProjectOutputs>H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\Bin\Debug\x64\lazer_shooty_game.exe</ProjectOutputs>
-  <ContentFiles></ContentFiles>
-  <SatelliteDlls></SatelliteDlls>
-  <NonRecipeFileRefs></NonRecipeFileRefs>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\Bin\Debug\x64\lazer_shooty_game.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
 </Project>
