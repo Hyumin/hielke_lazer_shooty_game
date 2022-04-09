@@ -13,6 +13,7 @@ public :
 	virtual void Update(float _dt) ;
 	virtual void Render(SDLRenderer* _renderer, Vector2 _world_pos = { 0,0 });
 	virtual void Die();
+	void Scale(float _s);//Scales the bullet and its collider based on the value of _s 1 will do nothign
 	void SetAngle(float _angle);
 
 protected:

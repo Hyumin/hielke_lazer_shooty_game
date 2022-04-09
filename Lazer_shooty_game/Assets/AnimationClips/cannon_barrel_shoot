@@ -1,0 +1,12 @@
+Texture: H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\Assets\SpriteSheets\player\lazer_barrel2.png
+Clip_name:  cannon_shoot
+anim_interval: 0.07500000
+is_looping: 0
+Using_offset: 0
+SDL_rect: 0 0 32 32
+SDL_rect: 32 0 32 32
+SDL_rect: 64 0 32 32
+SDL_rect: 96 0 32 32
+SDL_rect: 96 0 32 32
+SDL_rect: 64 0 32 32
+SDL_rect: 32 0 32 32

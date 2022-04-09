@@ -81,21 +81,38 @@ void MadEye::CalcDirection()
 	}
 }
 
+/*
 
+function procces (Array[] input)
+{
+	
+	unsigned int count= 0;
+	Array[] sorted_array = autosort(input);
+
+	for (unsigned int i =1 ; i <sorted_array.length(); ++i){
+	 
+
+	}
+
+	
+}
+
+*/
 void MadEye::Render(SDLRenderer* _renderer)
 {
 	m_object.m_Pos = m_pos - m_object.m_Size/2;
 	UpdateHealthBars();
 
-	//_renderer->DrawBox(m_health_bar_line, m_health_bar.col, { 0,0 });
+	_renderer->DrawBox(m_health_bar_line, m_health_bar.col, { 0,0 });
 	m_object.Render(_renderer, { 0,0 });
-	//_renderer->DrawFilledBox(m_health_bar, {0,0},1);
+	_renderer->DrawFilledBox(m_health_bar, {0,0},1);
 
 	AnimationClip* clip = m_controller->GetClip();
 	m_object.m_RenderInterface.srcRect = clip->GetRect();
 	if (m_debug)
 	{
 		_renderer->DrawCircle(m_circle, { 255,0,0,255 }, { 0,0 },1.0f, HDEFAULTEBUGLAYER);
+		//_renderer->DrawBoxZoomed(m_collider, { 255,0,0,255 }, { 0,0 },1.0f, HDEFAULTEBUGLAYER);
 		//_renderer->AddLine(m_pos, m_pos+m_direction*50, { 0,0 }, { 255,0,255,255 }, HDEFAULTEBUGLAYER);
 		_renderer->AddLine(m_pos, m_pos+m_vel*1, { 0,0 }, { 255,255,255,255 }, HDEFAULTEBUGLAYER);
 
@@ -112,17 +129,18 @@ void MadEye::Render(SDLRenderer* _renderer)
 	}
 
 }
-
-void MadEye::TakeDamage(float _dmg)
+//
+bool MadEye::TakeDamage(float _dmg)
 {
 	m_stats.current_health -= _dmg;
 	if (m_stats.current_health <= 0)
 	{
 		m_controller->SetState(MadEyeAnimController::AnimState::Falling);
 		m_falling = true;
-		m_collider.pos.x = -90000;
 		m_circle.pos.x = -90000000;
+		return true;
 	}
+	return false;
 }
 
 void MadEye::SetSize(float _x, float _y)
@@ -145,7 +163,7 @@ void MadEye::UpdateHealthBars()
 	m_health_bar_line.pos = { (float)m_health_bar.box.x,(float)m_health_bar.box.y};
 	m_health_bar_line.w = m_health_bar.box.w;
 	m_health_bar_line.h = m_health_bar.box.h;
-	m_health_bar.box.w *= m_stats.current_health / m_stats.max_health;
+	m_health_bar.box.w *= HielkMath::clamp( m_stats.current_health / m_stats.max_health,0,m_health_bar.box.w);
 }
 
 void MadEye::InitController()

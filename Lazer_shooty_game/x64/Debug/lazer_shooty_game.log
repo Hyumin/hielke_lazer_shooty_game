@@ -1,4 +1,30 @@
-﻿  Cannon.cpp
+﻿  Enemy.cpp
 H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
-H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Cannon.cpp(131,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  EnemySpawner.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\EnemySpawner.cpp(98,29): warning C4018: '<': signed/unsigned mismatch
+  MadEye.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\MadEye.cpp(157,38): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\MadEye.cpp(158,41): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\MadEye.cpp(160,37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\MadEye.cpp(161,40): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\MadEye.cpp(164,40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\MadEye.cpp(165,40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\MadEye.cpp(166,104): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\AI\MadEye.cpp(166,40): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+  MadEyeAnimController.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
+  Cannon.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Cannon.cpp(159,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Cannon.cpp(161,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Game.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Game.cpp(94,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Game.cpp(154,63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Game\Game.cpp(154,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Main.cpp
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Engine\ManagerSingleton.h(17,2): warning C4091: 'static ': ignored on left of 'ManagerSingleton' when no variable is declared
+H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\src\Main.cpp(45,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   lazer_shooty_game.vcxproj -> H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\Bin\Debug\x64\lazer_shooty_game.exe

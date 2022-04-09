@@ -19,7 +19,7 @@ public:
 
 	virtual void Update(float _dt) = 0;
 	virtual void Render(SDLRenderer* _renderer) =0;
-	virtual void TakeDamage(float _dmg_val)=0;
+	virtual bool TakeDamage(float _dmg_val)=0;
 
 	void SetPosition(Vector2 _pos) { m_pos = _pos; }
 	void SetPosition(float _x, float _y) 

@@ -38,8 +38,8 @@ int main(int arg, char* args[])
 {
 	bool quit = false;
 	SDL_Event e;
-
-	float start = 0.0f;
+	// 
+	float start = 0.0;
 	float end = 0.0f;
 	float timer = 0.0f;
 	srand(time(NULL));

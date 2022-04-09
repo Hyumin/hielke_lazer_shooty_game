@@ -1,8 +1,10 @@
 #pragma once
 #include "..\Engine\Object.h"
 #include "..\HielkMath.h"
+#include "player_stats.h"
 
-
+class AnimationClip;
+class TextField;
 class Projectile;
 class Cannon
 {
@@ -31,6 +33,7 @@ public:
 	void DebugMode(bool _new_val);
 	void ToggleMouseMode();
 
+	Cannon_Stats m_stats;
 private:
 
 	bool m_mouse_mode = false;
@@ -42,9 +45,11 @@ private:
 
 	Object* m_foot_hold;
 	Object* m_barrel;
+	AnimationClip* m_shoot_anim;
 	float m_rotation;
 	float m_prev_rotation;
 	Vector2 m_barrel_direction;
+	TextField* m_text_field;
 
 	float m_cd;
 	float m_cd_timer;

@@ -57,6 +57,12 @@ void LazerProjectile::Die()
 	m_anim_clip->Play();
 }
 
+void LazerProjectile::Scale(float _s)
+{
+	m_Circle.radius *= _s;
+	m_sprite->m_Size *= _s;
+}
+
 void LazerProjectile::SetAngle(float _angle)
 {
 	if (m_sprite != nullptr)

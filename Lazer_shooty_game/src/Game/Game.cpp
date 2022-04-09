@@ -76,12 +76,23 @@ void Game::Update(float _dt)
 		//Check collision with the enemies
 		for (uint32_t j = 0; j < m_player_projectiles.size(); ++j)
 		{
+			/* 
+			[1,0,0]
+			[0,1,0]
+			[0,0,1]
+			 
+			*/
 			/*Check here if untargetable as its less cost efficient compared to the collision check*/
 			if (!m_player_projectiles[j]->m_untargatable)
 			{
 				if(CircleToCircleCollision(m_player_projectiles[j]->m_Circle,m_enemies[i]->m_circle))
 				{
-					m_enemies[i]->TakeDamage(100.0f);
+					//Take dmg returns a boolean whether or not the enemy is dead after that 
+					//If its true the enemy died if its false its still alive
+					if (m_enemies[i]->TakeDamage(m_player_cannon->m_stats.m_Proj_dmg))
+					{
+						m_player_cannon->m_stats.AddExp(random_range(1, 1000));
+					}
 					m_player_projectiles[j]->Die();
 				}
 			}
@@ -192,12 +203,21 @@ void Game::MouseMove(int _x, int _y)
 	m_player_cannon->MouseMove(m_MousePos);
 }
 
+// 1 is left mouse, 2 is middle 3 is right
 void Game::MouseUp(int _key)
 {
+	if (_key == 1)
+	{
+		m_ksht = false;
+	}
 }
 
 void Game::MouseDown(int _key)
 {
+	if (_key == 1)
+	{
+		m_ksht = true;
+	}
 }
 
 void Game::Render(SDLRenderer* _renderer)

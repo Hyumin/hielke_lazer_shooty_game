@@ -271,3 +271,21 @@ static float random_range(float _min, float _max)
 
 	return random_num;
 }
+
+//TODO move everything to HielkMath, will cause ALL the classes to face compilation errors :)
+namespace HielkMath
+{
+	static float clamp(float _input, float _min, float _max)
+	{
+		if (_min >= _input)
+		{
+			return _min;
+		}
+		if (_max <= _input)
+		{
+			return _max;
+		}
+
+		return _input;
+	}
+};
