@@ -351,7 +351,7 @@ bool SDLRenderer::Init(std::string _name, unsigned int _width, unsigned int _hei
 {
 	bool succes = true;
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 	{
 		printf("SDL could not be initialized SDL_ERROR: %s \n", SDL_GetError());
 		succes = false;
@@ -364,6 +364,7 @@ bool SDLRenderer::Init(std::string _name, unsigned int _width, unsigned int _hei
 		{
 			printf("Window couold not be created! SDL_ERROR: %s \n", SDL_GetError());
 			succes = false;
+			return succes;
 		}
 		else
 		{
@@ -378,6 +379,7 @@ bool SDLRenderer::Init(std::string _name, unsigned int _width, unsigned int _hei
 			{
 				printf("Window renderer  could not be created! SDL_ERROR: %s\n", SDL_GetError());
 				succes = false;
+				return succes;
 			}
 			else
 			{
@@ -392,6 +394,7 @@ bool SDLRenderer::Init(std::string _name, unsigned int _width, unsigned int _hei
 				{
 					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 					succes = false;
+					return succes;
 				}
 				else
 				{
@@ -411,6 +414,12 @@ bool SDLRenderer::Init(std::string _name, unsigned int _width, unsigned int _hei
 					{
 						printf("Could not load defaultfont \n");
 					}
+				}
+				if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+				{
+					printf("Could not initalize SDL_Mixer Error: %s \n", Mix_GetError());
+					succes = false;
+					return succes;
 				}
 			}
 
@@ -435,6 +444,7 @@ void SDLRenderer::CleanUp()
 	SDL_DestroyWindow(m_Window);
 	m_Window = NULL;
 
+	Mix_Quit();
 	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();

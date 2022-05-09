@@ -21,7 +21,7 @@ public:
 	void Update(float _dt);
 	SDL_Rect& GetRect();
 	Vector2 GetOffset();
-	void LoadClipFromFile(const std::string& _path,ResourceManager* _manager);
+	bool LoadClipFromFile(const std::string& _path,ResourceManager* _manager);
 	void SaveClipToFilePath(const std::string& _path);
 	
 	void Play();

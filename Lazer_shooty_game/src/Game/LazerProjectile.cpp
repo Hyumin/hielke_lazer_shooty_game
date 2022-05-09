@@ -57,10 +57,31 @@ void LazerProjectile::Die()
 	m_anim_clip->Play();
 }
 
+void LazerProjectile::SetDirection(Vector2 _dir)
+{
+	m_direction = _dir;
+
+	//Calculate le angle hon hon hon
+	float rot = acosf(_dir.x);
+	if (_dir.y < 0)
+	{
+		rot *= -1;
+	}
+	SetAngle(rot);
+}
+
+void LazerProjectile::SetDamage(float _dmg)
+{
+	m_dmg = _dmg;
+}
+
 void LazerProjectile::Scale(float _s)
 {
 	m_Circle.radius *= _s;
 	m_sprite->m_Size *= _s;
+	m_sprite->m_RenderInterface.point.x=(int)(m_sprite->m_RenderInterface.point.x* _s);
+	m_sprite->m_RenderInterface.point.y=(int)(m_sprite->m_RenderInterface.point.y* _s);
+
 }
 
 void LazerProjectile::SetAngle(float _angle)

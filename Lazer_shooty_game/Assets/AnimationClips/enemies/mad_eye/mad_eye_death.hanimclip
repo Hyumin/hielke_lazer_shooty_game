@@ -1,6 +1,6 @@
 Texture: H:\knutsel_projectjes\hielke_lazer_shooty_game\Lazer_shooty_game\Assets\SpriteSheets\enemy\mad_Eye_sheet.png
 Clip_name: death 
-anim_interval: 0.0850000
+anim_interval: 0.0450000
 is_looping: 0
 Using_offset: 0
 Using_Events: 1
@@ -12,6 +12,10 @@ SDL_rect: 96 32 32 32
 SDL_rect: 96 32 32 32
 SDL_rect: 128 32 32 32
 Event: 6
+SDL_rect: 160 32 32 32
+SDL_rect: 160 32 32 32
+SDL_rect: 160 32 32 32
+SDL_rect: 160 32 32 32
 SDL_rect: 160 32 32 32
 SDL_rect: 160 32 32 32
 SDL_rect: 160 32 32 32

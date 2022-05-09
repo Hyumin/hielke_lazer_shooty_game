@@ -84,7 +84,7 @@ Vector2 AnimationClip::GetOffset()
 	return defaultReturnValue;
 }
 
-void AnimationClip::LoadClipFromFile(const std::string& _path, ResourceManager* _manager)
+bool AnimationClip::LoadClipFromFile(const std::string& _path, ResourceManager* _manager)
 {
 	m_SourceRects.clear();
 	m_SourceTexture = nullptr;
@@ -92,6 +92,10 @@ void AnimationClip::LoadClipFromFile(const std::string& _path, ResourceManager* 
 	std::string stuff = " ";
 	std::ifstream file(_path);
 	m_FileName = _path;
+	if (file.bad())
+	{
+		return false;
+	}
 	unsigned int curr_frame = 0;
 	while (!file.eof())
 	{
@@ -148,6 +152,7 @@ void AnimationClip::LoadClipFromFile(const std::string& _path, ResourceManager* 
 
 	}
 	GenerateOffsetsArray();
+	return true;
 }
 
 void AnimationClip::SaveClipToFilePath(const std::string& _path)

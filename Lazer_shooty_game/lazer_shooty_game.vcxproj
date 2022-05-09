@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\Weapons\BasicLazerWeapon.cpp" />
+    <ClCompile Include="src\Game\AI\HearyAnimController.cpp" />
+    <ClCompile Include="src\Game\AI\Heary.cpp" />
+    <ClCompile Include="src\Engine\Audio\SoundEffect.cpp" />
     <ClCompile Include="src\Debug\PlayerDebugInfo.cpp" />
     <ClCompile Include="src\Editor\AddFrameWindow.cpp" />
     <ClCompile Include="src\Editor\AddMapColiderWindow.cpp" />
@@ -62,8 +66,13 @@
     <ClCompile Include="src\Game\SpaceBackground .cpp" />
     <ClCompile Include="src\Game\SpaceBackground.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Game\Weapons\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\Weapons\BasicLazerWeapon.h" />
+    <ClInclude Include="src\Game\AI\HearyAnimController.h" />
+    <ClInclude Include="src\Game\AI\Heary.h" />
+    <ClInclude Include="src\Engine\Audio\SoundEffect.h" />
     <ClInclude Include="src\Debug\PlayerDebugInfo.h" />
     <ClInclude Include="src\Editor\AddFrameWindow.h" />
     <ClInclude Include="src\Editor\AddMapColiderWindow.h" />
@@ -107,6 +116,10 @@
     <ClInclude Include="src\Game\projectile.h" />
     <ClInclude Include="src\Game\SpaceBackground .h" />
     <ClInclude Include="src\HielkMath.h" />
+    <ClInclude Include="src\Game\Weapons\Weapon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\knutsel_projectjes_assets\sounds\simple_shoot_explosion.wav" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

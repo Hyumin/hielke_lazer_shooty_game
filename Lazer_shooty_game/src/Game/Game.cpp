@@ -1,7 +1,10 @@
+#pragma once
 #include "Game.h"
 #include <math.h>
 #include "..\Engine\ManagerSingleton.h"
 #include "..\Game\AI\EnemySpawner.h"
+#include "AI/Heary.h"
+#include "AI/MadEye.h"
 
 using namespace Hielke;
 
@@ -29,6 +32,10 @@ Game::~Game()
 	m_player_projectiles.clear();
 	delete m_bg;
 	m_bg = NULL;
+
+	delete m_LazerExplosion;
+	m_LazerExplosion= NULL;
+
 }
 
 void Game::Init()
@@ -38,6 +45,8 @@ void Game::Init()
 	m_enemy_spawner = new EnemySpawner();
 	m_enemy_spawner->Initialize(this, m_ResMan);
 	m_bg = new SpaceBackground({ 10,12,45,255 }, { 1920 ,1080 });
+	m_LazerExplosion = new SoundEffect();
+	m_LazerExplosion->LoadEffect("Assets//Audio//sound_effects//simple_shoot_explosion.wav");
 	//SpawnBalls(10);
 
 }
@@ -54,6 +63,7 @@ void Game::Update(float _dt)
 	m_player_cannon->Update(_dt);
 	m_enemy_spawner->Update(_dt);
 	m_bg->Update(_dt);
+	UpdateEnemies(_dt);
 	if (m_kup)
 	{
 		m_player_cannon->Rotate(-5*_dt);
@@ -67,42 +77,8 @@ void Game::Update(float _dt)
 		Projectile* proj = m_player_cannon->Shoot();
 		if (proj != nullptr)
 		{
+			proj->m_debug = m_DebugMode;
 			m_player_projectiles.push_back(proj);
-		}
-	}
-	for (unsigned i = 0; i < m_enemies.size(); ++i)
-	{
-		m_enemies[i]->Update(_dt);
-		//Check collision with the enemies
-		for (uint32_t j = 0; j < m_player_projectiles.size(); ++j)
-		{
-			/* 
-			[1,0,0]
-			[0,1,0]
-			[0,0,1]
-			 
-			*/
-			/*Check here if untargetable as its less cost efficient compared to the collision check*/
-			if (!m_player_projectiles[j]->m_untargatable)
-			{
-				if(CircleToCircleCollision(m_player_projectiles[j]->m_Circle,m_enemies[i]->m_circle))
-				{
-					//Take dmg returns a boolean whether or not the enemy is dead after that 
-					//If its true the enemy died if its false its still alive
-					if (m_enemies[i]->TakeDamage(m_player_cannon->m_stats.m_Proj_dmg))
-					{
-						m_player_cannon->m_stats.AddExp(random_range(1, 1000));
-					}
-					m_player_projectiles[j]->Die();
-				}
-			}
-		}
-		//If enemy is supposed to die delete em.
-		if (m_enemies[i]->GetDeathState())
-		{
-			printf("shoudld be deaht :O \n");
-			m_enemies.erase(m_enemies.begin() + i);
-			//SpawnBalls(2);
 		}
 	}
 	Vector2 player_pos = m_player_cannon->Get_Position();
@@ -167,6 +143,11 @@ void Game::ToggleDebugMode()
 		m_enemies[i]->m_debug = m_DebugMode;
 	}
 
+	for (uint32_t i = 0; i < m_player_projectiles.size(); ++i)
+	{
+		m_player_projectiles[i]->ToggleDebug();
+	}
+
 }
 
 void Game::KeyUp(unsigned int _key)
@@ -192,6 +173,11 @@ void Game::KeyUp(unsigned int _key)
 	if (_key == SDLK_2)
 	{
 		m_player_cannon->ToggleMouseMode();
+	}
+	if (_key == SDLK_9)
+	{
+		for (int i =0; i <10; ++i)
+		m_player_cannon->m_stats->LevelUp();
 	}
 }
 
@@ -243,4 +229,38 @@ void Game::AddEnemey(Enemy* _enem)
 {
 	_enem->m_debug = m_DebugMode;
 	m_enemies.push_back(_enem);
+}
+
+/**
+* Updates enemies and checks collision with the player projectiles.
+*/
+void Game::UpdateEnemies(float _dt)
+{
+	for (unsigned i = 0; i < m_enemies.size(); ++i)
+	{
+		m_enemies[i]->Update(_dt);
+		for (uint32_t j = 0; j < m_player_projectiles.size(); ++j)
+		{
+			/*Check here if untargetable as its less cost efficient compared to the collision check*/
+			if (!m_player_projectiles[j]->m_untargatable)
+			{
+				if (CircleToCircleCollision(m_player_projectiles[j]->m_Circle, m_enemies[i]->m_circle))
+				{
+					//Take dmg returns a boolean whether or not the enemy is dead after that 
+					//If its true the enemy died if its false its still alive
+					if (m_enemies[i]->TakeDamage(m_player_projectiles[j]->GetDamage()))
+					{
+						m_player_cannon->m_stats->AddExp(random_range(1, 1000));
+					}
+					m_player_projectiles[j]->Die();
+					m_LazerExplosion->PlayEffect();
+				}
+			}
+		}
+		//If enemy is supposed to die delete em.
+		if (m_enemies[i]->GetDeathState())
+		{
+			m_enemies.erase(m_enemies.begin() + i);
+		}
+	}
 }

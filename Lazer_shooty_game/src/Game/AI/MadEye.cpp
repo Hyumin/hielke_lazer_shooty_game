@@ -47,8 +47,6 @@ void MadEye::Update(float _dt)
 	}
 	m_vel = m_direction * m_weird_speed;
 
-	//m_walking_anim.m_AnimInterval = (2- m_weird_speed/300.0f)*0.15f;
-
 	m_pos += m_vel*_dt;
 	m_circle.pos = m_pos;
 	if (m_follow_path)

@@ -20,8 +20,8 @@ void MadEyeAnimController::Update(float _dt)
 		Vector2 pos = m_owner->GetPosition();
 		if (m_falling)
 		{
-			m_fall_ocity += _dt * m_fal_speed;
-			pos.y += m_fall_ocity;
+			m_fall_ocity += m_fal_speed;
+			pos.y += m_fall_ocity*_dt;
 			if (pos.y > 1040)
 			{
 				m_current_clip->Resume();
@@ -51,24 +51,21 @@ void MadEyeAnimController::Update(float _dt)
 void MadEyeAnimController::FallDown()
 {
 	m_falling = true;
-	m_fall_ocity = 0.2f;
+	m_fall_ocity = 125.0f;
 	
 }
 
 void MadEyeAnimController::TriggerEvent(unsigned int _input)
 {
-	printf("Triggering event: \n");
 	switch (_input)
 	{
 		//Falldown
 	case Falling:
 		FallDown();
-		printf("Falling");
 		m_current_clip->Pause();
 		break;
 		//shoot
 	case Moving:
-		printf("Moving:");
 		break;
 	default:
 		break;
@@ -82,8 +79,7 @@ bool MadEyeAnimController::LoadClips()
 	move->LoadClipFromFile("Assets//AnimationClips//enemies//mad_eye//mad_eye_walk.hanimclip", ManagerSingleton::getInstance().res_man);
 	falling->LoadClipFromFile("Assets//AnimationClips//enemies//mad_eye//mad_eye_death.hanimclip", ManagerSingleton::getInstance().res_man);
 	unsigned int numby = 0;
-	//std::bind(MadEyeAnimController::TriggerEvent, std::placeholders::_1)
-	/*std::function<void(unsigned int)>*/ auto callback = std::bind(&MadEyeAnimController::TriggerEvent,this, std::placeholders::_1);
+	auto callback = std::bind(&MadEyeAnimController::TriggerEvent,this, std::placeholders::_1);
 	move->SetFunction(callback);
 	//Set function pointer in MOVE and Falling for the trigger event
 	falling->SetFunction(callback);

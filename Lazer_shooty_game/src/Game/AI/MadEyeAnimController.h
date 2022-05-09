@@ -38,6 +38,6 @@ private :
 	AnimationClip* m_current_clip;
 
 	float m_fall_ocity =0.0f;
-	float m_fal_speed = 0.05f;
+	float m_fal_speed = 1.0f;
 
 };

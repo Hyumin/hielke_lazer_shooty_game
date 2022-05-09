@@ -38,6 +38,7 @@ public:
 
 	void Render(SDLRenderer* _renderer);
 	void AddEnemey(Enemy* _enem);//Adds an enemy to the enemy array
+	void UpdateEnemies(float _dt);
 	
 private:
 	void SpawnBalls(int _num_balls);
@@ -46,6 +47,7 @@ private:
 	ResourceManager* m_ResMan;
 	Cannon* m_player_cannon;
 	//Hielke::PlayerDebugInfo* m_DebugInfo;
+	SoundEffect* m_LazerExplosion;
 
 	Hielke::Map* m_CurrentMap;
 	std::vector<FloatingText> m_FloatingTexts;
